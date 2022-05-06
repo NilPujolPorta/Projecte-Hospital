@@ -36,4 +36,9 @@ public class Treballador {
         this.carrec = carrec;
     }
     
+
+    public void reservarGuardia(Guardies guardia) {
+        //comprovacions
+        guardies.add(guardia);
+    }
 }

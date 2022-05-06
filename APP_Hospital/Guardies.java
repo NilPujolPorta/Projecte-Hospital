@@ -11,5 +11,9 @@ public class Guardies {
         return id;
     }
     
+    public void reservarGuardia(Treballador Treballador){
+        TrApuntats.add(Treballador);
+        Treballador.reservarGuardia(this);
+    }
 
 }

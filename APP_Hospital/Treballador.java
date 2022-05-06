@@ -1,25 +1,20 @@
 package APP_Hospital;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Treballador {
     private short id;
     private String nom;
     private String cognoms;
     private Categoria carrec;
-    private int idGuardia;
+    List<Guardies> guardies = new ArrayList<Guardies>();
 
     public Treballador(short id, String nom, String cognoms, Categoria carrec) {
         this.id = id;
         this.nom = nom;
         this.cognoms = cognoms;
         this.carrec = carrec;
-    }
-
-    public int getIdGuardia() {
-        return idGuardia;
-    }
-
-    public void setIdGuardia(int idGuardia) {
-        this.idGuardia = idGuardia;
     }
 
     public short getId() {

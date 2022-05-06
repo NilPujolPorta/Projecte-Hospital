@@ -8,5 +8,7 @@ public class Dia {
     private Date data;
     List<Guardies> guardies = new ArrayList<Guardies>();
 
-
+    public Date getData() {
+        return data;
+    }
 }

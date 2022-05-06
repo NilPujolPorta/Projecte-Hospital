@@ -7,4 +7,9 @@ public class Guardies {
     private int id;
     List<Treballador> TrApuntats = new ArrayList<Treballador>();
 
+    public int getId() {
+        return id;
+    }
+    
+
 }

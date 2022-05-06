@@ -4,14 +4,22 @@ public class Treballador {
     private short id;
     private String nom;
     private String cognoms;
-    private String carrec;
-    private short prioritat;
+    private Categoria carrec;
+    private int idGuardia;
 
-    public Treballador(short id, String nom, String cognoms, String carrec) {
+    public Treballador(short id, String nom, String cognoms, Categoria carrec) {
         this.id = id;
         this.nom = nom;
         this.cognoms = cognoms;
         this.carrec = carrec;
+    }
+
+    public int getIdGuardia() {
+        return idGuardia;
+    }
+
+    public void setIdGuardia(int idGuardia) {
+        this.idGuardia = idGuardia;
     }
 
     public short getId() {
@@ -25,20 +33,12 @@ public class Treballador {
     public String getCognoms() {
         return cognoms;
     }
-    public String getCarrec() {
+    public Categoria getCarrec() {
         return carrec;
     }
 
-    public void setCarrec(String carrec) {
+    public void setCarrec(Categoria carrec) {
         this.carrec = carrec;
-    }
-
-    public short getPrioritat() {
-        return prioritat;
-    }
-
-    public void setPrioritat(short prioritat) {
-        this.prioritat = prioritat;
     }
     
 }

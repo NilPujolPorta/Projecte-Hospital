@@ -21,6 +21,21 @@ public class Guardies {
         this.zona = zona;
     }
 
+    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona) {
+        this.id = id;
+        this.dia = dia;
+        this.cat = cat;
+        this.torn = torn;
+        this.zona = zona;
+    }
+
+    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona) {
+        this.dia = dia;
+        this.cat = cat;
+        this.torn = torn;
+        this.zona = zona;
+    }
+
     public void setId(int id) {
         if (this.id != -1 || id <= 0) {
             return;
@@ -48,24 +63,13 @@ public class Guardies {
         return zona;
     }
 
-    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona) {
-        this.id = id;
-        this.dia = dia;
-        this.cat = cat;
-        this.torn = torn;
-        this.zona = zona;
-    }
-
-    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona) {
-        this.dia = dia;
-        this.cat = cat;
-        this.torn = torn;
-        this.zona = zona;
-    }
-
 
     public int getId() {
         return id;
+    }
+
+    public Treballador getPrincipal() {
+        return this.principal;
     }
     
     public boolean reservarGuardia(Treballador Treballador){

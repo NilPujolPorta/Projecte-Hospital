@@ -12,7 +12,7 @@ public class Guardies {
     private Zona zona;
     private Treballador principal;
 
-    public Guardies(int id, List<Treballador> trApuntats, Dia dia, Categoria cat, Torn torn, Zona zona) {
+    public Guardies(int id, List<Treballador> trApuntats, Dia dia, Categoria cat, Torn torn, Zona zona) {//desde bd amb treballadors
         this.id = id;
         this.trApuntats = trApuntats;
         this.dia = dia;
@@ -21,7 +21,7 @@ public class Guardies {
         this.zona = zona;
     }
 
-    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona) {
+    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona) {// desde base de dades 
         this.id = id;
         this.dia = dia;
         this.cat = cat;
@@ -29,7 +29,7 @@ public class Guardies {
         this.zona = zona;
     }
 
-    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona) {
+    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona) {//creacio desde programa
         this.dia = dia;
         this.cat = cat;
         this.torn = torn;
@@ -49,6 +49,9 @@ public class Guardies {
 
     public Dia getDia() {
         return dia;
+    }
+    public void setDia(Dia dia) {
+        this.dia = dia;
     }
 
     public Categoria getCat() {

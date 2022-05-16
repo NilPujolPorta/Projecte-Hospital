@@ -3,6 +3,9 @@ package APP_Hospital;
 import java.util.ArrayList;
 import java.util.List;
 
+import APP_Hospital.exceptions.AlreadyAdded;
+import APP_Hospital.exceptions.CategoryMissmatch;
+
 public class Guardies {
     private int id = -1;
     List<Treballador> trApuntats = new ArrayList<Treballador>();
@@ -10,9 +13,10 @@ public class Guardies {
     private Categoria cat;
     private Torn torn;
     private Zona zona;
-    private Treballador principal;
+    private int places;
+    Treballador treballadorsFinals[] = new Treballador[places];
 
-    public Guardies(int id, List<Treballador> trApuntats, Dia dia, Categoria cat, Torn torn, Zona zona) {//desde bd amb treballadors
+    public Guardies(int id, List<Treballador> trApuntats, Dia dia, Categoria cat, Torn torn, Zona zona, int places) {//desde bd amb treballadors
         this.id = id;
         this.trApuntats = trApuntats;
         this.dia = dia;
@@ -21,7 +25,7 @@ public class Guardies {
         this.zona = zona;
     }
 
-    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona) {// desde base de dades 
+    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona, int places) {// desde base de dades 
         this.id = id;
         this.dia = dia;
         this.cat = cat;
@@ -29,7 +33,7 @@ public class Guardies {
         this.zona = zona;
     }
 
-    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona) {//creacio desde programa
+    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona, int places) {//creacio desde programa
         this.dia = dia;
         this.cat = cat;
         this.torn = torn;
@@ -45,6 +49,10 @@ public class Guardies {
 
     public List<Treballador> getTrApuntats() {
         return trApuntats;
+    }
+
+    public int getPlaces(){
+        return places;
     }
 
     public Dia getDia() {
@@ -70,22 +78,28 @@ public class Guardies {
     public int getId() {
         return id;
     }
-
-    public Treballador getPrincipal() {
-        return this.principal;
-    }
     
-    public boolean reservarGuardia(Treballador Treballador){
-        if (this.trApuntats.contains(Treballador) || this.getCat() != Treballador.getCarrec()){
-            return false;
+    public boolean reservarGuardia(Treballador Treballador) throws AlreadyAdded, CategoryMissmatch{
+        if (this.trApuntats.contains(Treballador) ){
+            throw new AlreadyAdded();
+        } else if (this.getCat() != Treballador.getCarrec()){
+            throw new CategoryMissmatch();
         }
         trApuntats.add(Treballador);
-        Treballador.reservarGuardia(this);
+        try{
+            Treballador.reservarGuardia(this);
+        } catch (AlreadyAdded ex){
+            System.out.println("Guardia already added");
+            return false;
+        }
+        
         return true;
     }
     public void triaTreballador(){
-        //comprovacions de prioritat
-        //posa el treballador amb mes prioritat a la variable this.principal
+        for (Treballador treballador : trApuntats) {
+            treballador.calcularPrioritat();
+
+        }
     }
 
 }

@@ -18,7 +18,7 @@ public class utils{
 
     public static Properties loadConfig(){
         Properties prop = new Properties();
-        String fileName = System.getProperty("user.dir")+"\\APP_Hospital\\config.config";
+        String fileName = System.getProperty("user.dir")+"\\config\\config.config";
         try (FileInputStream fis = new FileInputStream(fileName)) {
             prop.load(fis);
         } catch (FileNotFoundException ex) {

@@ -9,7 +9,7 @@ public class Treballador {
     private short id;
     private String nom;
     private String cognoms;
-    private Categoria carrec;
+    private short idCategoria;
     public int prioritat;
     List<Guardies> guardies = new ArrayList<Guardies>();
 
@@ -18,11 +18,11 @@ public class Treballador {
         return prioritat;
     }
     
-    public Treballador(short id, String nom, String cognoms, Categoria carrec) {
+    public Treballador(short id, String nom, String cognoms, short idCategoria) {
         this.id = id;
         this.nom = nom;
         this.cognoms = cognoms;
-        this.carrec = carrec;
+        this.idCategoria = idCategoria;
     }
 
     public short getId() {

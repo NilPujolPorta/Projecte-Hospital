@@ -1,4 +1,4 @@
-package APP_Hospital.model.business.config;
+package APP_Hospital.model.business.utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

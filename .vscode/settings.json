@@ -1,6 +1,17 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Program Files (x86)\\MySQL\\Connector J 8.0\\mysql-connector-java-8.0.21.jar"
+        "c:\\Program Files (x86)\\MySQL\\Connector J 8.0\\mysql-connector-java-8.0.21.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\ant-javafx.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\deploy.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\java.jnlp.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\javafx-swt.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\javaws.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\jdk.deploy.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\jdk.javaws.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\jdk.plugin.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\jrt-fs.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\plugin.jar",
+        "c:\\Program Files\\Java\\jdk-10.0.2\\lib\\plugin-legacy.jar"
     ]
 }

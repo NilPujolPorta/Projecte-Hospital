@@ -1,4 +1,4 @@
-package APP_Hospital;
+package APP_Hospital.model.business.entities;
 
 public class Zona {
     private String zonaName;

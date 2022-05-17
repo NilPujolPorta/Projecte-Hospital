@@ -1,4 +1,4 @@
-package APP_Hospital;
+package APP_Hospital.model.business.entities;
 
 import java.util.ArrayList;
 import java.util.List;

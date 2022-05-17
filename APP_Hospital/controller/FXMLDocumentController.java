@@ -15,15 +15,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import APP_Hospital.model.business.entities.Persona;
 
 /**
  *
  * @author nilp2
  */
 public class FXMLDocumentController implements Initializable {
-     private Persona persona;
-    @FXML
     private Button button;
     @FXML
     private Button btn_desar;
@@ -39,26 +36,10 @@ public class FXMLDocumentController implements Initializable {
     private Label edatLable;
     @FXML
     private TextField edatInput;
-    
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        persona = new Persona("hey","patata", 20);
-    }    
-
-    @FXML
-    private void btnDesarAction(ActionEvent event) {
-        persona.setDni(dniinput.getText());
-        persona.setNom(nominput.getText());
-        persona.setEdat(Short.parseShort(edatInput.getText()));
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
+        
     }
 
-    @FXML
-    private void btnSaludarAction(ActionEvent event) {
-        mostrarDialog(persona);
-    }
-    private void mostrarDialog(Persona persona) {
-        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-
-    }
 }

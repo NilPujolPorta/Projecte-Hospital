@@ -23,41 +23,37 @@ import APP_Hospital.model.persistence.exceptions.DAOException;
 public class JDBCPersonaDAO implements PersonaDAO {
 
     @Override
-    public Persona get(long id) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public APP_Hospital.model.persistence.dao.contracts.Persona get(long id) throws DAOException {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
-    public List<Persona> getAll() throws DAOException {
-        List<Persona> llista = new ArrayList<>();
-        try {
-            Statement query = MySQLConnection.getInstance().getConnection().createStatement();
-            ResultSet result = query.executeQuery("Select * FROM persones");
-            
-            while(result.next()){
-                llista.add(new Persona(result.getString("name"),
-                        result.getString("dni"),
-                        result.getShort("edat")));
-            }
-        } catch (SQLException ex) {
-            throw new DAOException();
-        }
-        return llista;
+    public List<APP_Hospital.model.persistence.dao.contracts.Persona> getAll() throws DAOException {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
-    public void add(Persona t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(APP_Hospital.model.persistence.dao.contracts.Persona t) throws DAOException {
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
-    public void update(Persona t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(APP_Hospital.model.persistence.dao.contracts.Persona t) throws DAOException {
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
-    public void delete(Persona t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(APP_Hospital.model.persistence.dao.contracts.Persona t) throws DAOException {
+        // TODO Auto-generated method stub
+        
     }
+
+
+
+
     
 }

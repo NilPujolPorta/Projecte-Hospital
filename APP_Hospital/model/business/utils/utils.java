@@ -16,6 +16,11 @@ public class utils{
     static Connection conn = null;
     static String url = null;
 
+    /**
+     * Returns the Properties of the config file.
+     * @return     the {@code Properties} value of the config file,
+     *             or {@code null} if there is none.
+     */
     public static Properties loadConfig(){
         Properties prop = new Properties();
         String fileName = System.getProperty("user.dir")+"\\APP_Hospital\\model\\business\\config\\config.config";

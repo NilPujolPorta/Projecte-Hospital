@@ -3,6 +3,7 @@ package APP_Hospital.model.business.utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 
 import java.sql.Connection;
@@ -11,42 +12,46 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class utils{
-    
+public class utils {
+
     static Connection conn = null;
     static String url = null;
 
-    public static Properties loadConfig(){
+    /**
+     * Returns the Properties of the config file.
+     * 
+     * @return the {@code Properties} value of the config file,
+     *         or {@code null} if there is none.
+     */
+    public static Properties loadConfig() {
         Properties prop = new Properties();
-        String fileName = System.getProperty("user.dir")+"\\APP_Hospital\\config.config";
+        String fileName = System.getProperty("user.dir") + "\\APP_Hospital\\model\\business\\config\\config.config";
         try (FileInputStream fis = new FileInputStream(fileName)) {
             prop.load(fis);
         } catch (FileNotFoundException ex) {
             System.out.println("File not found: " + fileName);
         } catch (IOException e) {
-            System.out.println("ERROR");            
+            System.out.println("ERROR");
         }
         return prop;
     }
 
     public static void setUrl() {
         Properties bd = loadConfig();
-        url = "jdbc:mysql://"+bd.getProperty("app.db.Server")+
-                "/"+bd.getProperty("app.db.databaseName")+"?" +
-                "user="+bd.getProperty("app.db.User")+
-                "&password="+bd.getProperty("app.db.Password");
-        
+        url = "jdbc:mysql://" + bd.getProperty("app.db.Server") +
+                "/" + bd.getProperty("app.db.databaseName") + "?" +
+                "user=" + bd.getProperty("app.db.User") +
+                "&password=" + bd.getProperty("app.db.Password");
+
     }
-    
-    public static Connection DBconnection(){
-        if(url==null){
+
+    public static Connection DBconnection() {
+        if (url == null) {
             setUrl();
         }
         try {
-            conn =
-               DriverManager.getConnection(url);
+            conn = DriverManager.getConnection(url);
 
-        
         } catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -55,7 +60,8 @@ public class utils{
         }
         return conn;
     }
-    public static void DBclose(){
+
+    public static void DBclose() {
 
         try {
             conn.close();
@@ -64,6 +70,9 @@ public class utils{
             Logger.getLogger(utils.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    // Cercar si existeix un valor enter en concret dins un array
+    public static boolean contains(final int[] arr, final int key) {
+        return Arrays.stream(arr).anyMatch(i -> i == key);
+    }
 }
-
-

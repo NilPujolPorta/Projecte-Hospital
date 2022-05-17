@@ -23,37 +23,34 @@ import APP_Hospital.model.persistence.exceptions.DAOException;
 public class JDBCTreballadorDAO implements TreballadorDAO {
 
     @Override
-    public APP_Hospital.model.persistence.dao.contracts.Treballador get(long id) throws DAOException {
+    public Treballador get(long id) throws DAOException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<APP_Hospital.model.persistence.dao.contracts.Treballador> getAll() throws DAOException {
+    public List<Treballador> getAll() throws DAOException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void add(APP_Hospital.model.persistence.dao.contracts.Treballador t) throws DAOException {
+    public void add(Treballador t) throws DAOException {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void update(APP_Hospital.model.persistence.dao.contracts.Treballador t) throws DAOException {
+    public void update(Treballador t) throws DAOException {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void delete(APP_Hospital.model.persistence.dao.contracts.Treballador t) throws DAOException {
+    public void delete(Treballador t) throws DAOException {
         // TODO Auto-generated method stub
         
     }
 
-
-
-
-    
+  
 }

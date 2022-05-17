@@ -38,13 +38,14 @@ public class utils{
         
     }
     
-    public static void DBconnection(){
-        if(conn==null){
+    public static Connection DBconnection(){
+        if(url==null){
             setUrl();
         }
         try {
             conn =
                DriverManager.getConnection(url);
+
         
         } catch (SQLException ex) {
             // handle any errors
@@ -52,6 +53,7 @@ public class utils{
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
+        return conn;
     }
     public static void DBclose(){
 

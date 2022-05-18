@@ -19,7 +19,7 @@ import APP_Hospital.model.business.utils.utils;
 
 public class MySQLConnection {
     
-
+    static String database;
     private static Connection conn = null;
     private static String url = null;
     private static MySQLConnection instance;
@@ -56,10 +56,15 @@ public class MySQLConnection {
     }
     public static void setUrl() {
         Properties bd = utils.loadConfig();
+        database= bd.getProperty("app.db.databaseName");
         url = "jdbc:mysql://" + bd.getProperty("app.db.Server") +
-                "/" + bd.getProperty("app.db.databaseName") + "?" +
+                "/" + database + "?" +
                 "user=" + bd.getProperty("app.db.User") +
                 "&password=" + bd.getProperty("app.db.Password");
 
     }
+    public static String getDatabase() {
+        return database;
+    }
+        
 }

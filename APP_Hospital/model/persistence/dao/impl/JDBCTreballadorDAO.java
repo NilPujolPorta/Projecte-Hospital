@@ -64,7 +64,7 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
         
-        return null;
+        return T1 ;
     }
 
     @Override

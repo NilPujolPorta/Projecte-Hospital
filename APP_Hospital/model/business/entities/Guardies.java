@@ -10,13 +10,13 @@ public class Guardies {
     private int id = -1;
     List<Treballador> trApuntats = new ArrayList<Treballador>();
     private Dia dia;
-    private Categoria cat;
+    private short cat;
     private Torn torn;
     private Zona zona;
     private int places;
     Treballador treballadorsFinals[] = new Treballador[places];
 
-    public Guardies(int id, List<Treballador> trApuntats, Dia dia, Categoria cat, Torn torn, Zona zona, int places) {//desde bd amb treballadors
+    public Guardies(int id, List<Treballador> trApuntats, Dia dia, short cat, Torn torn, Zona zona, int places) {//desde bd amb treballadors
         this.id = id;
         this.trApuntats = trApuntats;
         this.dia = dia;
@@ -25,7 +25,7 @@ public class Guardies {
         this.zona = zona;
     }
 
-    public Guardies(int id, Dia dia, Categoria cat, Torn torn, Zona zona, int places) {// desde base de dades 
+    public Guardies(int id, Dia dia, short cat, Torn torn, Zona zona, int places) {// desde base de dades 
         this.id = id;
         this.dia = dia;
         this.cat = cat;
@@ -33,7 +33,7 @@ public class Guardies {
         this.zona = zona;
     }
 
-    public Guardies(Dia dia, Categoria cat, Torn torn, Zona zona, int places) {//creacio desde programa
+    public Guardies(Dia dia, short cat, Torn torn, Zona zona, int places) {//creacio desde programa
         this.dia = dia;
         this.cat = cat;
         this.torn = torn;
@@ -62,7 +62,7 @@ public class Guardies {
         this.dia = dia;
     }
 
-    public Categoria getCat() {
+    public short getCat() {
         return cat;
     }
 
@@ -82,7 +82,7 @@ public class Guardies {
     public boolean reservarGuardia(Treballador Treballador) throws AlreadyAdded, CategoryMissmatch{
         if (this.trApuntats.contains(Treballador) ){
             throw new AlreadyAdded();
-        } else if (this.getCat() != Treballador.getCarrec()){
+        } else if (this.getCat() != Treballador.getCat()){
             throw new CategoryMissmatch();
         }
         trApuntats.add(Treballador);

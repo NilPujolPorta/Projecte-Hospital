@@ -36,12 +36,12 @@ public class Treballador {
     public String getCognoms() {
         return cognoms;
     }
-    public Categoria getCarrec() {
-        return carrec;
+    public short getCat() {
+        return idCategoria;
     }
 
-    public void setCarrec(Categoria carrec) {
-        this.carrec = carrec;
+    public void setCarrec(short carrec) {
+        this.idCategoria = carrec;
     }
     
 

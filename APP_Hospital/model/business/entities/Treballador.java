@@ -13,11 +13,7 @@ public class Treballador {
     public int prioritat;
     List<Guardies> guardies = new ArrayList<Guardies>();
 
-
-    public int getPrioritat() {
-        return prioritat;
-    }
-    
+   
     public Treballador(short id, String nom, String cognoms, short idCategoria) {
         this.id = id;
         this.nom = nom;
@@ -38,6 +34,10 @@ public class Treballador {
     }
     public short getCat() {
         return idCategoria;
+    }
+
+    public int getPrioritat() {
+        return prioritat;
     }
 
     public void setCat(short carrec) {

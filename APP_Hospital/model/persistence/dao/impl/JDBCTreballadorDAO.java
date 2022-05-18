@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import APP_Hospital.model.persistence.exceptions.DAOException;
 import APP_Hospital.model.business.utils.utils;
 import java.util.Properties;
@@ -35,12 +37,12 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
         conn=MySQLConnection.getConnection();
         //Posar a utils???
         //podriem posar una var amb cada valor del fitxer per facilitar l'obtenció
-        Properties bd = utils.loadConfig();
-        String database=bd.getProperty("app.db.databaseName");
+        /*Properties bd = utils.loadConfig();
+        String database=bd.getProperty("app.db.databaseName");*/
         //Posar a utils???
         try{
             stmt = conn.createStatement();
-            rs= stmt.executeQuery("SELECT * FROM "+database+" where id="+id);
+            rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +" where id="+id);
             rs = stmt.getResultSet();
             
 
@@ -69,7 +71,17 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
 
     @Override
     public void add(Treballador t) throws DAOException {
-       
+        try{
+            stmt = conn.createStatement();
+            String query ="insert into"+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognom,idCategroria,pioritat) values(?,?,?,?,?,?)";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setShort (1, t.getId());
+            preparedStmt.setString (2, t.getNom());
+            preparedStmt.setString (3, t.getCognoms());
+            preparedStmt.setShort (3, t.getCat());
+            preparedStmt.setShort (3, t.getPrioritat());
+            preparedStmt.execute();
+        }catch{}
         
     }
 

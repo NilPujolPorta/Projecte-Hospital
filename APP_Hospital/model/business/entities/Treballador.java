@@ -10,7 +10,7 @@ public class Treballador {
     private String nom;
     private String cognoms;
     private short idCategoria;
-    public int prioritat;
+    public short prioritat;
     List<Guardies> guardies = new ArrayList<Guardies>();
 
    
@@ -36,7 +36,7 @@ public class Treballador {
         return idCategoria;
     }
 
-    public int getPrioritat() {
+    public short getPrioritat() {
         return prioritat;
     }
 

@@ -26,22 +26,13 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
     Statement stmt = null;
     ResultSet rs = null;
 
-    //method to set the connection in case it doesn't exist
-    private void setConn(){
-        conn=utils.DBconnection();
-    }
-    //method to set the connection as a parameter
-    public void setConn(Connection n){
-        conn=n;
-    }
 
+    //return Treballador as an object from the database
     @Override
     public Treballador get(long id) throws DAOException {
         Treballador T1 = null;
-        //ensure the connection to DB exist
-        if(conn==null){
-            setConn();
-        }
+        
+        conn=MySQLConnection.getConnection();
         //Posar a utils???
         //podriem posar una var amb cada valor del fitxer per facilitar l'obtenció
         Properties bd = utils.loadConfig();
@@ -68,8 +59,6 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
         return T1;
-        
-        
     }
 
     @Override
@@ -80,7 +69,7 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
 
     @Override
     public void add(Treballador t) throws DAOException {
-        // TODO Auto-generated method stub
+       
         
     }
 

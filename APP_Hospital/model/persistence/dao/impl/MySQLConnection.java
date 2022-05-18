@@ -8,38 +8,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import APP_Hospital.model.business.utils.utils;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-/**
- *
- * @author nilp2
- */
+
 public class MySQLConnection {
-    private final String FILE_CONFIG = "resources/config.properties";
+    
+
+    private static Connection conn = null;
+    private static String url = null;
     private static MySQLConnection instance;
-    private Connection connection;
     
     private MySQLConnection(){
-        Properties prop = new Properties();
-        try{
-            InputStream config = new FileInputStream(FILE_CONFIG);
-            prop.load(config);
-            String driver= prop.getProperty("driver");
-            String url= prop.getProperty("url");
-            String user= prop.getProperty("user");
-            String password= prop.getProperty("password");
+        if (url == null) {
+            setUrl();
+        }
+        try {
+            conn = DriverManager.getConnection(url);
 
-            Class.forName(driver);
-            connection = DriverManager.getConnection(url,user,password);
-
-        }catch(IOException ex){
-            System.out.println(ex);
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
     public static MySQLConnection getInstance(){
@@ -48,14 +44,22 @@ public class MySQLConnection {
         }
         return instance;
     }
-    public Connection getConnection(){
-        return connection;
+    public static Connection getConnection(){
+        return conn;
     }
     public void disconnect(){
         try {
-            connection.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public static void setUrl() {
+        Properties bd = utils.loadConfig();
+        url = "jdbc:mysql://" + bd.getProperty("app.db.Server") +
+                "/" + bd.getProperty("app.db.databaseName") + "?" +
+                "user=" + bd.getProperty("app.db.User") +
+                "&password=" + bd.getProperty("app.db.Password");
+
     }
 }

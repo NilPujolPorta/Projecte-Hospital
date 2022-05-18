@@ -40,7 +40,7 @@ public class Treballador {
         return idCategoria;
     }
 
-    public void setCarrec(short carrec) {
+    public void setCat(short carrec) {
         this.idCategoria = carrec;
     }
     

@@ -37,6 +37,7 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
 
     @Override
     public Treballador get(long id) throws DAOException {
+        Treballador T1 = null;
         //ensure the connection to DB exist
         if(conn==null){
             setConn();
@@ -50,21 +51,25 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
             stmt = conn.createStatement();
             rs= stmt.executeQuery("SELECT * FROM "+database+" where id="+id);
             rs = stmt.getResultSet();
+            
 
+            //if Treballador exists in the DB return it as an object
+            //si no el troba tornem un null???
             if (rs.next())
             {
-                Treballador T1 = new Treballador(rs.getShort(1),
-                 rs.getString(2),
-                  rs.getString(3),
-                  rs.getShort(4));
+                T1 = new Treballador(rs.getShort(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getShort(4));
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
+        return T1;
         
-        return T1 ;
+        
     }
 
     @Override

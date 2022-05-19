@@ -81,7 +81,11 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
             preparedStmt.setShort (3, t.getCat());
             preparedStmt.setShort (3, t.getPrioritat());
             preparedStmt.execute();
-        }catch{}
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
         
     }
 

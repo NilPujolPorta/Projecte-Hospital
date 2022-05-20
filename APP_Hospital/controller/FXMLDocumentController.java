@@ -1,31 +1,35 @@
 package APP_Hospital.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class FXMLDocumentController {
 
     @FXML
-    private ResourceBundle resources;
+    private TextField Input_passwd;
 
     @FXML
-    private URL location;
+    private TextField Input_user;
 
     @FXML
-    private Button button;
+    private Text TextOutError;
 
     @FXML
-    void btnSaludarAction(ActionEvent event) {
-
-    }
+    private Button button_Login;
 
     @FXML
-    void initialize() {
-        assert button != null : "fx:id=\"button\" was not injected: check your FXML file 'FXMLDocument.fxml'.";
-
+    void btnLoginAction(ActionEvent event) {
+        //comprovar credencials
+        if (true) {
+            Stage stage = (Stage) button_Login.getScene().getWindow();
+            stage.close();
+            Platform.exit();
+        }
     }
 
 }

@@ -24,25 +24,15 @@ import java.util.Properties;
 
 public class JDBCTreballadorDAO implements TreballadorDAO {
 
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+    Connection conn;
+    Statement stmt;
+    ResultSet rs;
 
-    public JDBCTreballadorDAO(){
-        this.conn=MySQLConnection.getConnection();
-        stmt=null;
-        rs=null;
-    }
     //return Treballador as an object from the database
     @Override
     public Treballador get(long id) throws DAOException {
         Treballador T1 = null;
         
-        //Posar a utils???
-        //podriem posar una var amb cada valor del fitxer per facilitar l'obtenció
-        /*Properties bd = utils.loadConfig();
-        String database=bd.getProperty("app.db.databaseName");*/
-        //Posar a utils???
         try{
             stmt = conn.createStatement();
             rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +" where id="+id);
@@ -76,13 +66,12 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
     public void add(Treballador t) throws DAOException {
         try{
             stmt = conn.createStatement();
-            String query ="insert into"+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognom,idCategroria,pioritat) values(?,?,?,?,?,?)";
+            String query ="insert into"+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognom,idCategoria) values(?,?,?,?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setShort (1, t.getId());
             preparedStmt.setString (2, t.getNom());
             preparedStmt.setString (3, t.getCognoms());
             preparedStmt.setShort (3, t.getCat());
-            preparedStmt.setShort (3, t.getPrioritat());
             preparedStmt.execute();
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());

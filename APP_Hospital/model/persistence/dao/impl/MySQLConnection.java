@@ -24,7 +24,7 @@ public class MySQLConnection {
     private static String url = null;
     private static MySQLConnection instance;
     
-    private MySQLConnection(){
+    public MySQLConnection(){
         if (url == null) {
             setUrl();
         }
@@ -45,6 +45,9 @@ public class MySQLConnection {
         return instance;
     }
     public static Connection getConnection(){
+        if (conn == null){
+            instance = new MySQLConnection();
+        }
         return conn;
     }
     public void disconnect(){
@@ -62,6 +65,10 @@ public class MySQLConnection {
                 "user=" + bd.getProperty("app.db.User") +
                 "&password=" + bd.getProperty("app.db.Password");
 
+    }
+    public static String getUrl() {
+        if (url == null){setUrl();}
+        return url;
     }
     public static String getDatabase() {
         return database;

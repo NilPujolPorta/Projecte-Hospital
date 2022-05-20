@@ -2,35 +2,22 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="200" prefWidth="462.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.FXMLDocumentController">
     <children>
       <Group layoutX="316.0" layoutY="160.0">
          <children>
-              <Button fx:id="button" layoutX="63.0" onAction="#btnSaludarAction" text="Saludar" />
-            <Button fx:id="btn_desar" mnemonicParsing="false" onAction="#btnDesarAction" text="Desar" />
+              <Button fx:id="button" layoutX="63.0" onAction="#btnSaludarAction" text="Entrar" />
          </children>
       </Group>
-      <Group layoutX="28.0" layoutY="40.0">
-         <children>
-            <Label fx:id="nomlable" layoutY="4.0" text="Com et dius?" />
-            <TextField fx:id="nominput" layoutX="97.0" prefHeight="25.0" prefWidth="241.0" />
-         </children>
-      </Group>
-      <Group layoutX="28.0" layoutY="75.0">
-         <children>
-            <Label fx:id="dniLable" layoutY="4.0" text="DNI" />
-            <TextField fx:id="dniinput" layoutX="97.0" promptText="00000000X" />
-         </children>
-      </Group>
-      <Group layoutX="28.0" layoutY="110.0">
-         <children>
-            <Label fx:id="edatLable" layoutY="4.0" text="Edat" />
-            <TextField fx:id="edatInput" layoutX="97.0" />
-         </children>
-      </Group>
+      <Group layoutX="28.0" layoutY="40.0" />
+      <Group layoutX="28.0" layoutY="110.0" />
+      <Text layoutX="84.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuari" />
+      <Text layoutX="43.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constrassenya" wrappingWidth="81.3367919921875" />
+      <TextField id="Input_User" layoutX="183.0" layoutY="53.0" />
+      <TextField id="Input_Password" layoutX="184.0" layoutY="97.0" />
     </children>
 </AnchorPane>

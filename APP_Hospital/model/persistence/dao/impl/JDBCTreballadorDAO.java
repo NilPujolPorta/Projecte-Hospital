@@ -28,13 +28,16 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
     Statement stmt = null;
     ResultSet rs = null;
 
-
+    public JDBCTreballadorDAO(){
+        this.conn=MySQLConnection.getConnection();
+        stmt=null;
+        rs=null;
+    }
     //return Treballador as an object from the database
     @Override
     public Treballador get(long id) throws DAOException {
         Treballador T1 = null;
         
-        conn=MySQLConnection.getConnection();
         //Posar a utils???
         //podriem posar una var amb cada valor del fitxer per facilitar l'obtenció
         /*Properties bd = utils.loadConfig();

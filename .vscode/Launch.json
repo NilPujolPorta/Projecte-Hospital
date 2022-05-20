@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch main",
+            "request": "launch",
+            "mainClass": "APP_Hospital.view.gui.main",
+            "projectName": "Projecte-Hospital_9e8a6f56"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "APP_Hospital.view.gui.Main",
+            "vmArgs": "--module-path C:\\Java\\javafx-sdk-18.0.1\\lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}

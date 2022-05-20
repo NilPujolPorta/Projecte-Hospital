@@ -6,18 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="462.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="462.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="APP_Hospital.controller.FXMLDocumentController">
     <children>
       <Group layoutX="316.0" layoutY="160.0">
          <children>
-              <Button fx:id="button" layoutX="63.0" onAction="#btnSaludarAction" text="Entrar" />
+              <Button fx:id="button_Login" layoutX="63.0" onAction="#btnLoginAction" text="Entrar" />
          </children>
       </Group>
       <Group layoutX="28.0" layoutY="40.0" />
       <Group layoutX="28.0" layoutY="110.0" />
       <Text layoutX="84.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuari" />
       <Text layoutX="43.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constrassenya" wrappingWidth="81.3367919921875" />
-      <TextField id="Input_User" layoutX="183.0" layoutY="53.0" />
-      <TextField id="Input_Password" layoutX="184.0" layoutY="97.0" />
+      <TextField id="Input_User" fx:id="Input_user" layoutX="183.0" layoutY="53.0" />
+      <TextField id="Input_Password" fx:id="Input_passwd" layoutX="184.0" layoutY="97.0" />
+      <Text fx:id="TextOutError" layoutX="183.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.60000000000014" />
     </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package APP_Hospital.view.gui;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import APP_Hospital.model.business.utils.utils;
 public class calendari {
 
     private int anyActual;
+    // final String EXIT = "exit";
 
     /**
      * Obtenim l'any del mes seleccionat
@@ -21,7 +23,7 @@ public class calendari {
         Calendar calendari = Calendar.getInstance();
         int anyActual = calendari.get(Calendar.YEAR);
         int mesActual = calendari.get(Calendar.MONTH);
-
+        mesActual += 1;
         if (mesActual < mes) {
             anyActual += 1;
         }
@@ -39,12 +41,11 @@ public class calendari {
         int mes = 1;
         boolean correcte = false;
         while (!correcte) {
-            System.out.print("Escull un mes utilitzant el número de mes:" + "\n"
+            System.out.print("Escull un mes utilitzant el número de mes, per exemple 6" + "\n"
                     + "Pots escollir des del mes actual fins els pròxims 11 mesos" + "\n"
                     + "-----------------------------------------" + "\n" + "Mes:");
             Scanner lectura = new Scanner(System.in);
             mes = lectura.nextInt();
-
             correcte = (mes < 13 && mes > 0) ? true : false;
         }
 
@@ -59,7 +60,6 @@ public class calendari {
      */
     public static void veureCalendari(int mes) {
         Calendar calendari = Calendar.getInstance();
-        int[] dades = new int[2];
         int[] diumenges = new int[5]; // Desar els diumenges per poder realitzar comprobacions
         int i = 0;
 
@@ -67,13 +67,17 @@ public class calendari {
         calendari.set(anyActual, mes - 1, 1, 0, 0, 0);
         calendari.set(Calendar.MILLISECOND, 0);
 
+        System.out.println("--->" + mes);
+
         // mostrar només els diumenges
-        while (calendari.get(Calendar.MONTH) == mes) {
+        while (calendari.get(Calendar.MONTH) + 1 == mes) {
             if (calendari.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+
                 System.out.println(calendari.get(Calendar.DAY_OF_MONTH));
                 diumenges[i] = calendari.get(Calendar.DAY_OF_MONTH);
                 i++;
                 calendari.add(Calendar.DAY_OF_MONTH, 7); // Saltar 7 dies
+
             } else {
                 calendari.add(Calendar.DAY_OF_MONTH, 1); // Saltar 1 dia
             }
@@ -92,7 +96,7 @@ public class calendari {
     private static void escollirDia(int[] diumenges, int mes, int anyActual) {
         boolean correcte = false;
         Scanner lectura = new Scanner(System.in);
-        int dia = 0;
+        int dia = 1;
 
         // boolean trobat = false;
         while (!correcte) {
@@ -100,10 +104,11 @@ public class calendari {
             System.out.println("Escull un dia: ");
             dia = lectura.nextInt();
             correcte = utils.contains(diumenges, dia);
-            if (!correcte) {
+            if (!correcte || dia == 0) {
                 System.out.println("Error: El dia escollit no és correcte");
             }
         }
+
         escollirZona(dia, mes, anyActual);
 
     }
@@ -117,20 +122,24 @@ public class calendari {
      */
     private static void escollirZona(int dia, int mes, int anyActual) {
         Scanner lectura = new Scanner(System.in);
-        // ULL això no sé si pot fallar
-        String[] zones = utils.cercarValors("zones");
+        // obtenir les zones
+        String cercar = "zones";
+        String[] zones = { "unitat1", "unitat3", "unitat4", "UCIES" };
         String zona = "";
         boolean correcte = false;
+        int quantesZones = zones.length;
+        System.out.println("\n" + "----------------------------------------");
+        System.out.print("Zones a escollir: ");
 
-        for (String string : zones) {
-            System.out.println("Zones a escollir:" + "\n" + zones + " ");
+        for (int i = 0; i < quantesZones; i++) {
+            System.out.print(zones[i] + " ");
         }
 
         while (!correcte) {
-            System.out.println("----------------------------------------");
-            System.out.println("Escull una zona: ");
+            System.out.println("\n" + "Escull una zona: ");
             zona = lectura.next();
-            correcte = utils.containsStrings(zones, zona);
+            correcte = (Arrays.asList(zones).contains(zona));
+
             if (!correcte) {
                 System.out.println("Error: La zona escollida no és correcte");
             }
@@ -151,16 +160,26 @@ public class calendari {
         boolean correcte = false;
         String torn = "";
         Scanner lectura = new Scanner(System.in);
-        String[] torns = utils.cercarValors("torns");
+        // obetnir els torns
+        String cercar = "torns";
+        String[] torns = { "dia", "nit" };
+
+        int quantsTorns = torns.length;
+        System.out.println("\n" + "----------------------------------------");
+        System.out.print("Torns a escollir: ");
+
+        for (int i = 0; i < quantsTorns; i++) {
+            System.out.print(torns[i] + " ");
+        }
 
         // escollir dia o nit
         while (!correcte) {
-            System.out.println("----------------------------------------");
-            System.out.println("Escull un torn: ");
-            torn = lectura.next();
-            correcte = utils.containsStrings(torns, torn);
+            System.out.println("\n" + "Escull un torn: ");
+            torn = lectura.nextLine();
+            correcte = (Arrays.asList(torns).contains(torn));
+
             if (!correcte) {
-                System.out.println("Error: La zona escollida no és correcte");
+                System.out.println("Error: El torn escollit no és correcte");
             }
         }
 
@@ -185,19 +204,27 @@ public class calendari {
         System.out.println("Has escollit: ");
         System.out.println(dia + "/" + mes + "/" + anyActual + " a " + zona + " el torn de " + torn);
         System.out.print("Estàs d'acord? (escriu: Si/No): ");
-        torn = lectura.next();
+        String resposta = lectura.nextLine();
 
         while (!correcte) {
+            System.out.println("---" + resposta);
 
-            if (torn == "Si" || torn == "si") {
-                correcte = true;
+            switch (resposta.toLowerCase()) {
+                case "si":
+                    correcte = true;
+                    break;
 
-            } else if (torn == "No" || torn == "no") {
-                System.exit(0);
+                case "No":
+                    System.exit(0);
 
-            } else {
-                System.out.print("Error: Resposta Incorrecte (escriu: Si/No): ");
+                    break;
+
+                default:
+                    System.out.print("Error: Resposta Incorrecte (escriu: Si/No): ");
+                    resposta = lectura.next();
+                    break;
             }
+
         }
 
         // ara tenim totes les dades i són correcte, procedir a desar la guardia

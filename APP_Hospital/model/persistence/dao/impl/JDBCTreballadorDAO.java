@@ -8,18 +8,12 @@ package APP_Hospital.model.persistence.dao.impl;
 import java.sql.SQLException;
 import java.util.List;
 import APP_Hospital.model.business.entities.Treballador;
-import APP_Hospital.model.persistence.dao.contracts.TreballadorDAO;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import APP_Hospital.model.persistence.exceptions.DAOException;
-import APP_Hospital.model.business.utils.utils;
-import java.util.Properties;
 
 
 public class JDBCTreballadorDAO{
@@ -59,7 +53,6 @@ public class JDBCTreballadorDAO{
 
 
     public static List<Treballador> getAll() throws DAOException {
-        // TODO Auto-generated method stub
         return null;
     }
 

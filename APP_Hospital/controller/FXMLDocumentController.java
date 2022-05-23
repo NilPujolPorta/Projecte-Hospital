@@ -1,10 +1,20 @@
 package APP_Hospital.controller;
 
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+
+import APP_Hospital.model.persistence.dao.impl.MySQLConnection;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -13,7 +23,7 @@ import javafx.stage.Stage;
 public class FXMLDocumentController {
 
     @FXML
-    private TextField Input_passwd;
+    private PasswordField Input_passwd;
 
     @FXML
     private TextField Input_user;
@@ -48,9 +58,25 @@ public class FXMLDocumentController {
         }
     }
 
-    private Boolean checkCredencial(String user, String password) {
+    private Boolean checkCredencial(String user, String password) throws SQLException{
+        boolean result = false;
+        Connection conn = MySQLConnection.getConnection();
         //comprobacions
-        return false;
+         try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Login where usuari="+user+" and password="+password);
+            rs = stmt.getResultSet();
+            
+            if (rs.next())
+            {
+             result= true;   
+            }
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
+        return result;
     }
 
 }

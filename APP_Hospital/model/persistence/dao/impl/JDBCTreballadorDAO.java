@@ -60,7 +60,7 @@ public class JDBCTreballadorDAO{
     public static void add(Treballador t) throws DAOException, SQLException {
         Connection conn = MySQLConnection.getConnection();
         try{
-            Statement stmt = conn.createStatement();
+            conn.createStatement();
             String query ="insert into "+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognoms,idCategoria) values(?,?,?,?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setShort (1, t.getId());
@@ -78,13 +78,11 @@ public class JDBCTreballadorDAO{
 
      
     public static void update(Treballador t) throws DAOException {
-        // TODO Auto-generated method stub
         
     }
 
      
     public static void delete(Treballador t) throws DAOException {
-        // TODO Auto-generated method stub
         
     }
 

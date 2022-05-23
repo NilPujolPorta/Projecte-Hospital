@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
@@ -18,7 +19,7 @@
       <Text layoutX="84.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuari" />
       <Text layoutX="43.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constrassenya" wrappingWidth="81.3367919921875" />
       <TextField id="Input_User" fx:id="Input_user" layoutX="183.0" layoutY="53.0" />
-      <TextField id="Input_Password" fx:id="Input_passwd" layoutX="184.0" layoutY="97.0" />
       <Text fx:id="TextOutError" layoutX="183.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.60000000000014" />
+      <PasswordField fx:id="Input_passwd" layoutX="183.0" layoutY="97.0" />
     </children>
 </AnchorPane>

@@ -1,11 +1,12 @@
 package APP_Hospital.controller;
 
-import APP_Hospital.exceptions.AlreadyAdded;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,9 +29,11 @@ public class FXMLDocumentController {
         String user = Input_user.getText();
         String password = Input_passwd.getText();
         Boolean Login = false;
+        
         try{
             Login = checkCredencial(user, password);
         } catch (Exception e){
+            TextOutError.setFill(Color.rgb(255, 0, 0));
             TextOutError.setText("Error de DB:\n"+e);
             return;
         } 
@@ -40,13 +43,14 @@ public class FXMLDocumentController {
             stage.close();
             Platform.exit();
         } else {
+            TextOutError.setFill(Color.rgb(255, 0, 0));
             TextOutError.setText("Credencials erronies");
         }
     }
 
     private Boolean checkCredencial(String user, String password) {
         //comprobacions
-        return true;
+        return false;
     }
 
 }

@@ -1,5 +1,6 @@
 package APP_Hospital.controller;
 
+import APP_Hospital.exceptions.AlreadyAdded;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,12 +25,28 @@ public class FXMLDocumentController {
 
     @FXML
     void btnLoginAction(ActionEvent event) {
-        //comprovar credencials
-        if (true) {
+        String user = Input_user.getText();
+        String password = Input_passwd.getText();
+        Boolean Login = false;
+        try{
+            Login = checkCredencial(user, password);
+        } catch (Exception e){
+            TextOutError.setText("Error de DB:\n"+e);
+            return;
+        } 
+        
+        if (Login) {
             Stage stage = (Stage) button_Login.getScene().getWindow();
             stage.close();
             Platform.exit();
+        } else {
+            TextOutError.setText("Credencials erronies");
         }
+    }
+
+    private Boolean checkCredencial(String user, String password) {
+        //comprobacions
+        return true;
     }
 
 }

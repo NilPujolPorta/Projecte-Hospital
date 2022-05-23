@@ -22,20 +22,20 @@ import APP_Hospital.model.business.utils.utils;
 import java.util.Properties;
 
 
-public class JDBCTreballadorDAO implements TreballadorDAO {
+public class JDBCTreballadorDAO{
 
-    Connection conn;
-    Statement stmt;
-    ResultSet rs;
+
 
     //return Treballador as an object from the database
-    @Override
-    public Treballador get(long id) throws DAOException {
+
+    public static Treballador get(long id) throws DAOException, SQLException {
         Treballador T1 = null;
+
+        Connection conn = MySQLConnection.getConnection();
         
         try{
-            stmt = conn.createStatement();
-            rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +" where id="+id);
+            Statement stmt = conn.createStatement();
+            ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Treballador where idTreballador="+id);
             rs = stmt.getResultSet();
             
 
@@ -47,6 +47,7 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
                 rs.getString(2),
                 rs.getString(3),
                 rs.getShort(4));
+                
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
@@ -56,22 +57,23 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
         return T1;
     }
 
-    @Override
-    public List<Treballador> getAll() throws DAOException {
+
+    public static List<Treballador> getAll() throws DAOException {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
-    public void add(Treballador t) throws DAOException {
+
+    public static void add(Treballador t) throws DAOException, SQLException {
+        Connection conn = MySQLConnection.getConnection();
         try{
-            stmt = conn.createStatement();
-            String query ="insert into"+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognom,idCategoria) values(?,?,?,?)";
+            Statement stmt = conn.createStatement();
+            String query ="insert into "+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognoms,idCategoria) values(?,?,?,?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setShort (1, t.getId());
             preparedStmt.setString (2, t.getNom());
             preparedStmt.setString (3, t.getCognoms());
-            preparedStmt.setShort (3, t.getCat());
+            preparedStmt.setShort (4, t.getCat());
             preparedStmt.execute();
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
@@ -81,14 +83,14 @@ public class JDBCTreballadorDAO implements TreballadorDAO {
         
     }
 
-    @Override
-    public void update(Treballador t) throws DAOException {
+     
+    public static void update(Treballador t) throws DAOException {
         // TODO Auto-generated method stub
         
     }
 
-    @Override
-    public void delete(Treballador t) throws DAOException {
+     
+    public static void delete(Treballador t) throws DAOException {
         // TODO Auto-generated method stub
         
     }

@@ -19,6 +19,7 @@ public class Treballador {
         this.nom = nom;
         this.cognoms = cognoms;
         this.idCategoria = idCategoria;
+        prioritat = 1;
     }
 
     public short getId() {

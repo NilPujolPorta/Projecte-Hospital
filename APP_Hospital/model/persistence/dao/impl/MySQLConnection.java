@@ -20,8 +20,8 @@ import APP_Hospital.model.business.utils.utils;
 public class MySQLConnection {
     
     static String database;
-    private static Connection conn = null;
-    private static String url = null;
+    private static Connection conn;
+    private static String url;
     private static MySQLConnection instance;
     
     public MySQLConnection(){
@@ -44,10 +44,11 @@ public class MySQLConnection {
         }
         return instance;
     }
-    public static Connection getConnection(){
+    public static Connection getConnection() throws SQLException{
         if (conn == null){
             instance = new MySQLConnection();
         }
+        conn = DriverManager.getConnection(url);
         return conn;
     }
     public void disconnect(){

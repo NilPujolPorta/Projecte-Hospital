@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MainTest",
+            "request": "launch",
+            "mainClass": "APP_Hospital.view.gui.MainTest",
+            "projectName": "Projecte-Hospital_437a2207"
+        },
+        {
+            "type": "java",
             "name": "Launch main",
             "request": "launch",
             "mainClass": "APP_Hospital.view.gui.main",

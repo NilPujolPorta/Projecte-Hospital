@@ -62,7 +62,6 @@ public class MySQLConnection {
                 "/" + database + "?" +
                 "user=" + bd.getProperty("app.db.User") +
                 "&password=" + bd.getProperty("app.db.Password");
-
     }
     public static String getUrl() {
         if (url == null){setUrl();}

@@ -22,9 +22,8 @@ public class JDBCTreballadorDAO{
 
     //return Treballador as an object from the database
 
-    public static Treballador get(long id) throws DAOException, SQLException {
+    public static Treballador get(short id) throws DAOException, SQLException {
         Treballador T1 = null;
-
         Connection conn = MySQLConnection.getConnection();
         
         try{

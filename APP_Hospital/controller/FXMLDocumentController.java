@@ -60,22 +60,24 @@ public class FXMLDocumentController {
 
     private Boolean checkCredencial(String user, String password) throws SQLException{
         boolean result = false;
+        Short idTreballador = null;
         Connection conn = MySQLConnection.getConnection();
         //comprobacions
          try{
             Statement stmt = conn.createStatement();
-            ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Login where usuari="+user+" and password="+password);
+            ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Login where usuari='"+user+"' and password='"+password+"'");
             rs = stmt.getResultSet();
-            
             if (rs.next())
             {
-             result= true;   
+             result= true;
+             idTreballador = rs.getShort(1);
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
+        System.out.println("ID de Treballador: "+idTreballador);
         return result;
     }
 

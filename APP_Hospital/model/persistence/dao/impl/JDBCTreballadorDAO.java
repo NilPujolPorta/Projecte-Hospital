@@ -96,14 +96,43 @@ public class JDBCTreballadorDAO{
     }
 
      
-    public static void update(Treballador t) throws DAOException {
+    public static void update(Treballador t) throws DAOException, SQLException {
+        Short id = t.getId();
+        Connection conn = MySQLConnection.getConnection();
+        delete(id);
+        add(t);
         
     }
 
      
-    public static void delete(Treballador t) throws DAOException {
-        
-    }
+    public static void delete(Treballador t) throws DAOException, SQLException {
+        Short id = t.getId();
+        Connection conn = MySQLConnection.getConnection();
+        String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id;
 
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+           
+        }
+    }
+    public static void delete(short id) throws DAOException, SQLException {
+        Connection conn = MySQLConnection.getConnection();
+        String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id;
+
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+           
+        }
+    }
   
 }

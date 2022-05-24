@@ -51,8 +51,28 @@ public class JDBCTreballadorDAO{
     }
 
 
-    public static List<Treballador> getAll() throws DAOException {
-        return null;
+    public static String getAll() throws DAOException, SQLException{
+        Connection conn = MySQLConnection.getConnection();
+        String sql = "SELECT * FROM "+MySQLConnection.getDatabase()+".Treballador";
+        String result ="";
+
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs= stmt.executeQuery(sql);
+            rs = stmt.getResultSet();
+
+            //millorar rendiment
+            while (rs.next())
+            {
+                result=result + "Prioritat: "+rs.getShort(5)+" | Categoria: "+rs.getShort(4)+" | id: "+rs.getShort(1)+" | Usuari: "+rs.getString(2)+
+                " "+rs.getString(3)+"\n";
+            }
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
+        return result;
     }
 
 

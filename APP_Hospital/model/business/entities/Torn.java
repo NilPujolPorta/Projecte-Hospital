@@ -8,7 +8,7 @@ public class Torn {
         this.type = type;
     }
 
-    public String getTipus() {
+    public String getTorn() {
         return type;
     }
     

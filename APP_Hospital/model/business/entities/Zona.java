@@ -1,11 +1,11 @@
 package APP_Hospital.model.business.entities;
 
 public class Zona {
-    private String zonaName;
+    private String nom;
     public Zona(String zonaName) {
-        this.zonaName = zonaName;
+        this.nom = zonaName;
     }
-    public String getZonaName() {
-        return zonaName;
+    public String getZona() {
+        return nom;
     }
 }

@@ -9,35 +9,39 @@ import APP_Hospital.exceptions.CategoryMissmatch;
 public class Guardies {
     private int id = -1;
     List<Treballador> trApuntats = new ArrayList<Treballador>();
-    private Dia dia;
+    //day fromat = YYYYMMDD
+    private String dia;
     private short cat;
-    private Torn torn;
-    private Zona zona;
-    private int places;
+    private short torn;
+    private short zona;
+    private short places;
     Treballador treballadorsFinals[] = new Treballador[places];
 
-    public Guardies(int id, List<Treballador> trApuntats, Dia dia, short cat, Torn torn, Zona zona, int places) {//desde bd amb treballadors
+    public Guardies(int id, List<Treballador> trApuntats, String dia, short cat, short torn, short zona, short places) {//desde bd amb treballadors
         this.id = id;
         this.trApuntats = trApuntats;
         this.dia = dia;
         this.cat = cat;
         this.torn = torn;
         this.zona = zona;
+        this.places = places;
     }
 
-    public Guardies(int id, Dia dia, short cat, Torn torn, Zona zona, int places) {// desde base de dades 
+    public Guardies(int id, String dia, short cat, short torn, short zona, short places) {// desde base de dades 
         this.id = id;
         this.dia = dia;
         this.cat = cat;
         this.torn = torn;
         this.zona = zona;
+        this.places = places;
     }
 
-    public Guardies(Dia dia, short cat, Torn torn, Zona zona, int places) {//creacio desde programa
+    public Guardies(String dia, short cat, short torn, short zona, short places) {//creacio desde programa
         this.dia = dia;
         this.cat = cat;
         this.torn = torn;
         this.zona = zona;
+        this.places = places;
     }
 
     public void setId(int id) {
@@ -51,14 +55,14 @@ public class Guardies {
         return trApuntats;
     }
 
-    public int getPlaces(){
+    public short getPlaces(){
         return places;
     }
 
-    public Dia getDia() {
+    public String getDia() {
         return dia;
     }
-    public void setDia(Dia dia) {
+    public void setDia(String dia) {
         this.dia = dia;
     }
 
@@ -66,11 +70,11 @@ public class Guardies {
         return cat;
     }
 
-    public Torn getTorn() {
+    public short getTorn() {
         return torn;
     }
 
-    public Zona getZona() {
+    public short getZona() {
         return zona;
     }
 

@@ -9,7 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 
+import APP_Hospital.model.business.entities.Treballador;
+import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
 import APP_Hospital.model.persistence.dao.impl.MySQLConnection;
+import APP_Hospital.view.gui.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,6 +42,7 @@ public class FXMLDocumentController {
         String user = Input_user.getText();
         String password = Input_passwd.getText();
         Boolean Login = false;
+
         
         try{
             Login = checkCredencial(user, password);
@@ -60,7 +64,6 @@ public class FXMLDocumentController {
 
     private Boolean checkCredencial(String user, String password) throws SQLException{
         boolean result = false;
-        Short idTreballador = null;
         Connection conn = MySQLConnection.getConnection();
         //comprobacions
          try{
@@ -70,14 +73,14 @@ public class FXMLDocumentController {
             if (rs.next())
             {
              result= true;
-             idTreballador = rs.getShort(1);
+             Short idTreballador = rs.getShort(1);
+             Main.TreballadorLoggejat = JDBCTreballadorDAO.get(idTreballador);
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
-        System.out.println("ID de Treballador: "+idTreballador);
         return result;
     }
 

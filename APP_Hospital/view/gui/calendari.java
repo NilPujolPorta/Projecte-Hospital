@@ -1,16 +1,17 @@
 package APP_Hospital.view.gui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Properties;
 import java.util.Scanner;
+import java.util.Date;
 
 import APP_Hospital.model.business.utils.utils;
 
 public class calendari {
 
     private int anyActual;
-    // final String EXIT = "exit";
 
     /**
      * Obtenim l'any del mes seleccionat
@@ -24,11 +25,19 @@ public class calendari {
         int anyActual = calendari.get(Calendar.YEAR);
         int mesActual = calendari.get(Calendar.MONTH);
         mesActual += 1;
-        if (mesActual < mes) {
+
+        System.out.println("Mes ACTUAL: " + mesActual);
+        System.out.println("Mes ENTRAT: " + mes);
+
+        System.out.println("any ACTUAL: " + anyActual);
+
+        if (mes < mesActual) {
             anyActual += 1;
         }
+        System.out.println("any processat: " + anyActual);
 
         return anyActual;
+
     }
 
     /**
@@ -40,13 +49,21 @@ public class calendari {
     public static void menuOpcions() {
         int mes = 1;
         boolean correcte = false;
+
+        System.out.print("Escull un mes utilitzant el número de mes, per exemple 6" + "\n"
+                + "Pots escollir des del mes actual fins els pròxims 11 mesos" + "\n");
+        separador();
+
         while (!correcte) {
-            System.out.print("Escull un mes utilitzant el número de mes, per exemple 6" + "\n"
-                    + "Pots escollir des del mes actual fins els pròxims 11 mesos" + "\n"
-                    + "-----------------------------------------" + "\n" + "Mes:");
+            System.out.print("Mes: ");
+
             Scanner lectura = new Scanner(System.in);
             mes = lectura.nextInt();
             correcte = (mes < 13 && mes > 0) ? true : false;
+            if (!correcte) {
+                System.out.println(
+                        "\n" + "\n" + "Error: El mes escollit no és corecte, si us plau escull un mes de l'1 al 12!");
+            }
         }
 
         veureCalendari(mes);
@@ -63,17 +80,29 @@ public class calendari {
         int[] diumenges = new int[5]; // Desar els diumenges per poder realitzar comprobacions
         int i = 0;
 
+        int mesActual = Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime()));
+        int diaActual = Integer.parseInt(new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
+
         int anyActual = getAnyDelMes(mes);
+
         calendari.set(anyActual, mes - 1, 1, 0, 0, 0);
+
+        if (mes == mesActual) {
+            calendari.set(anyActual, mes - 1, diaActual, 0, 0, 0);
+
+        }
         calendari.set(Calendar.MILLISECOND, 0);
 
-        System.out.println("--->" + mes);
+        int dia = calendari.get(Calendar.DAY_OF_MONTH);
+        System.out.println("\n" + "Dies disponibles: ");
 
         // mostrar només els diumenges
         while (calendari.get(Calendar.MONTH) + 1 == mes) {
             if (calendari.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 
-                System.out.println(calendari.get(Calendar.DAY_OF_MONTH));
+                // obtenir la data de dia d'avui, si el mes és l'actual i el diumenge és
+                // inferior al dia d'avui, no s'ha de mostrar
+                System.out.println(" -> " + calendari.get(Calendar.DAY_OF_MONTH));
                 diumenges[i] = calendari.get(Calendar.DAY_OF_MONTH);
                 i++;
                 calendari.add(Calendar.DAY_OF_MONTH, 7); // Saltar 7 dies
@@ -97,15 +126,13 @@ public class calendari {
         boolean correcte = false;
         Scanner lectura = new Scanner(System.in);
         int dia = 1;
-
         // boolean trobat = false;
         while (!correcte) {
-            System.out.println("----------------------------------------");
-            System.out.println("Escull un dia: ");
+            System.out.print("\n" + "\n" + "Escull un dia: ");
             dia = lectura.nextInt();
             correcte = utils.contains(diumenges, dia);
             if (!correcte || dia == 0) {
-                System.out.println("Error: El dia escollit no és correcte");
+                System.out.println("\n" + "\n" + "Error: El dia escollit no és correcte");
             }
         }
 
@@ -128,7 +155,8 @@ public class calendari {
         String zona = "";
         boolean correcte = false;
         int quantesZones = zones.length;
-        System.out.println("\n" + "----------------------------------------");
+        separador();
+
         System.out.print("Zones a escollir: ");
 
         for (int i = 0; i < quantesZones; i++) {
@@ -136,12 +164,12 @@ public class calendari {
         }
 
         while (!correcte) {
-            System.out.println("\n" + "Escull una zona: ");
+            System.out.print("\n" + "\n" + "Escull una zona: ");
             zona = lectura.next();
             correcte = (Arrays.asList(zones).contains(zona));
 
             if (!correcte) {
-                System.out.println("Error: La zona escollida no és correcte");
+                System.out.println("\n" + "Error: La zona escollida no és correcte");
             }
         }
 
@@ -165,7 +193,7 @@ public class calendari {
         String[] torns = { "dia", "nit" };
 
         int quantsTorns = torns.length;
-        System.out.println("\n" + "----------------------------------------");
+        separador();
         System.out.print("Torns a escollir: ");
 
         for (int i = 0; i < quantsTorns; i++) {
@@ -174,12 +202,12 @@ public class calendari {
 
         // escollir dia o nit
         while (!correcte) {
-            System.out.println("\n" + "Escull un torn: ");
+            System.out.print("\n" + "\n" + "Escull un torn: ");
             torn = lectura.nextLine();
             correcte = (Arrays.asList(torns).contains(torn));
 
             if (!correcte) {
-                System.out.println("Error: El torn escollit no és correcte");
+                System.out.println("\n" + "Error: El torn escollit no és correcte");
             }
         }
 
@@ -200,15 +228,32 @@ public class calendari {
         Scanner lectura = new Scanner(System.in);
         boolean correcte = false;
 
-        System.out.println("----------------------------------------");
-        System.out.println("Has escollit: ");
-        System.out.println(dia + "/" + mes + "/" + anyActual + " a " + zona + " el torn de " + torn);
-        System.out.print("Estàs d'acord? (escriu: Si/No): ");
+        separador();
+        System.out.println(" * Has escollit: ");
+
+        String diaTractat;
+        String mesTractat;
+
+        if (dia < 10) {
+            diaTractat = '0' + Integer.toString(dia);
+        } else {
+            diaTractat = Integer.toString(dia);
+        }
+        if (mes < 10) {
+            mesTractat = '0' + Integer.toString(mes);
+        } else {
+            mesTractat = Integer.toString(mes);
+        }
+
+        String data = diaTractat + "-" + mesTractat + "-" + anyActual;
+
+        System.out.println(data + " a " + zona + " el torn de " + torn + "\n");
+
+        System.out.print(" * Estàs d'acord? (escriu: Si/No): ");
         String resposta = lectura.nextLine();
 
         while (!correcte) {
             System.out.println("---" + resposta);
-
             switch (resposta.toLowerCase()) {
                 case "si":
                     correcte = true;
@@ -220,14 +265,20 @@ public class calendari {
                     break;
 
                 default:
-                    System.out.print("Error: Resposta Incorrecte (escriu: Si/No): ");
+                    System.out.print("\n" + "Error: Resposta Incorrecte (escriu: Si/No): ");
                     resposta = lectura.next();
                     break;
             }
-
         }
 
-        // ara tenim totes les dades i són correcte, procedir a desar la guardia
+        String dataJunta = anyActual + mesTractat + diaTractat;
+
+        // ********* desar aquesta guardia ********
+
+    }
+
+    private static void separador() {
+        System.out.println("\n" + "-----------------------------------------------------------" + "\n");
 
     }
 

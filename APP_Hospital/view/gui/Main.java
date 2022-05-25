@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static Treballador TreballadorLoggejat;
+    public static boolean intencioQuit = false;
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -20,7 +21,9 @@ public class Main extends Application {
 
     @Override
     public void stop() {
-
+        if (intencioQuit) {
+            return;
+        }
         utils.loadConfig();
 
         // ** Punts de Menu **
@@ -31,6 +34,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        launch(args);
+    }
+    public static void logOut(String[] args) {
+        TreballadorLoggejat = null;
         launch(args);
     }
 

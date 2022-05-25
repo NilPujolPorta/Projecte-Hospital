@@ -7,9 +7,6 @@ import java.sql.SQLException;
 
 
 import java.sql.Statement;
-import java.sql.PreparedStatement;
-
-import APP_Hospital.model.business.entities.Treballador;
 import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
 import APP_Hospital.model.persistence.dao.impl.MySQLConnection;
 import APP_Hospital.view.gui.Main;
@@ -33,6 +30,9 @@ public class FXMLDocumentController {
 
     @FXML
     private Text TextOutError;
+
+    @FXML
+    private Button btn_quit;
 
     @FXML
     private Button button_Login;
@@ -82,6 +82,14 @@ public class FXMLDocumentController {
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
         return result;
+    }
+    
+    @FXML
+    void quit(ActionEvent event) {
+        Main.intencioQuit = true;
+        Stage stage = (Stage) button_Login.getScene().getWindow();
+        stage.close();
+        Platform.exit();
     }
 
 }

@@ -21,5 +21,6 @@
       <TextField id="Input_User" fx:id="Input_user" layoutX="183.0" layoutY="53.0" />
       <Text fx:id="TextOutError" layoutX="183.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.60000000000014" />
       <PasswordField fx:id="Input_passwd" layoutX="183.0" layoutY="97.0" />
+      <Button fx:id="btn_quit" layoutX="65.0" layoutY="161.0" mnemonicParsing="false" onAction="#quit" text="Sortir" />
     </children>
 </AnchorPane>

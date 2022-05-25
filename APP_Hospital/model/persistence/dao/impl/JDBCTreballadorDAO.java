@@ -6,7 +6,6 @@
 package APP_Hospital.model.persistence.dao.impl;
 
 import java.sql.SQLException;
-import java.util.List;
 import APP_Hospital.model.business.entities.Treballador;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -98,7 +97,7 @@ public class JDBCTreballadorDAO{
      
     public static void update(Treballador t) throws DAOException, SQLException {
         Short id = t.getId();
-        Connection conn = MySQLConnection.getConnection();
+        MySQLConnection.getConnection();
         delete(id);
         add(t);
         

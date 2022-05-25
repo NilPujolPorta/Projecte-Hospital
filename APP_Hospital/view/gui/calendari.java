@@ -1,11 +1,10 @@
 package APP_Hospital.view.gui;
 
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
-import java.util.Date;
 
 import APP_Hospital.model.business.utils.utils;
 

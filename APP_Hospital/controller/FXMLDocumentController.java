@@ -7,9 +7,6 @@ import java.sql.SQLException;
 
 
 import java.sql.Statement;
-import java.sql.PreparedStatement;
-
-import APP_Hospital.model.business.entities.Treballador;
 import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
 import APP_Hospital.model.persistence.dao.impl.MySQLConnection;
 import APP_Hospital.view.gui.Main;

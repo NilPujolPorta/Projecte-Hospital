@@ -35,6 +35,9 @@ public class FXMLDocumentController {
     private Text TextOutError;
 
     @FXML
+    private Button btn_quit;
+
+    @FXML
     private Button button_Login;
 
     @FXML
@@ -82,6 +85,14 @@ public class FXMLDocumentController {
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
         return result;
+    }
+    
+    @FXML
+    void quit(ActionEvent event) {
+        Main.intencioQuit = true;
+        Stage stage = (Stage) button_Login.getScene().getWindow();
+        stage.close();
+        Platform.exit();
     }
 
 }

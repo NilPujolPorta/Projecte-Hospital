@@ -10,23 +10,27 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, 500, 200));
         primaryStage.show();
     }
+
     @Override
-    public void stop(){
+    public void stop() {
 
         utils.loadConfig();
-        calendari.menuOpcions();
-    }
 
+        // ** Punts de Menu **
+        // veure guardies
+        // apuntarse guardia
+        calendari.menuOpcions();
+
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }

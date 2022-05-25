@@ -103,7 +103,7 @@ public class JDBCTreballadorDAO{
         
     }
 
-     
+    //delete Treballador passing it as an object
     public static void delete(Treballador t) throws DAOException, SQLException {
         Short id = t.getId();
         Connection conn = MySQLConnection.getConnection();
@@ -119,6 +119,7 @@ public class JDBCTreballadorDAO{
            
         }
     }
+    //delete Treballador passing is as an ID
     public static void delete(short id) throws DAOException, SQLException {
         Connection conn = MySQLConnection.getConnection();
         String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id;
@@ -132,6 +133,29 @@ public class JDBCTreballadorDAO{
             System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
            
         }
+    }
+
+    public static String guaridesInscrites(Treballador t) throws DAOException, SQLException {
+        Connection conn = MySQLConnection.getConnection();
+        Short id = t.getId();
+        String sql = "select t.idGuardia, idData from hospital.TreballadorsApuntats t left join hospital.Guardia g ON t.idGuardia = g.idGuardia where idTreballador="+id;
+        String result = "";
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs= stmt.executeQuery(sql);
+            rs = stmt.getResultSet();
+
+            //millorar rendiment
+            while (rs.next())
+            {
+                result=result + "idGuardia: "+rs.getShort(1)+" | Data: "+rs.getString(2)+"\n";
+            }
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
+        return null;
     }
   
 }

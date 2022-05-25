@@ -38,28 +38,4 @@ public class utils {
         return Arrays.stream(arr).anyMatch(i -> i == key);
     }
 
-    /**
-     * Cercar si existeix un string en concret dins un array
-     */
-    public static boolean containsStrings(final String[] arr, final String key) {
-        return Arrays.stream(arr).anyMatch(i -> i == key);
-    }
-
-    /**
-     * Cerca a config les zones, torns, etc i les retorna en forma d'array
-     * Rep 1 paràmetre a cercar (zones, torns)
-     * 
-     * @return array de Zones
-     */
-    public static String[] cercarValors(String cercar) {
-
-        Properties config = utils.loadConfig();
-        int numCercar = Integer.parseInt(config.getProperty("app.num" + cercar));
-        String cerca = config.getProperty("app." + cercar);
-        String[] arrayNoms = new String[numCercar];
-        arrayNoms = cerca.split("\\s+");
-
-        return arrayNoms;
-    }
-
 }

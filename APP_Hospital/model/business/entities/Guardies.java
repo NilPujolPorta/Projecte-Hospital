@@ -119,6 +119,10 @@ public class Guardies {
     }
 
     public void cancelarGuardia(Treballador Treballador) {
+        if (this.trApuntats.contains(Treballador) ){
+            this.trApuntats.remove(Treballador);
+        }
+        Treballador.cancelarGuardia(this);
         try {
             JDBCTreballadorDAO.cancelarGuardia(Treballador, this);
         } catch (DAOException e) {

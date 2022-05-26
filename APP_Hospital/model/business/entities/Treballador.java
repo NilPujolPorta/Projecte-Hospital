@@ -63,7 +63,9 @@ public class Treballador {
     }
 
     public void cancelarGuardia(Guardies guardia) {
-        
+        if (guardies.contains(guardia)) {
+            guardies.remove(guardia);
+        }  
     }
 
     public List<Guardies> getGuardies(){

@@ -28,7 +28,7 @@ public class Treballador {
         this.cognoms = cognoms;
         this.idCategoria = idCategoria;
         this.prioritat = prioritat;
-        
+
     }
 
     public short getId() {
@@ -61,6 +61,11 @@ public class Treballador {
         }
         guardies.add(guardia);
     }
+
+    public void cancelarGuardia(Guardies guardia) {
+        
+    }
+
     public List<Guardies> getGuardies(){
         return guardies;
     }

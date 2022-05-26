@@ -1,10 +1,13 @@
 package APP_Hospital.model.business.entities;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import APP_Hospital.exceptions.AlreadyAdded;
 import APP_Hospital.exceptions.CategoryMissmatch;
+import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
+import APP_Hospital.model.persistence.exceptions.DAOException;
 
 public class Guardies {
     private short id = -1;
@@ -94,11 +97,37 @@ public class Guardies {
             Treballador.reservarGuardia(this);
         } catch (AlreadyAdded ex){
             System.out.println("Guardia already added");
+
+            try {
+                JDBCTreballadorDAO.inscriureGuardia(Treballador, this);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
             return false;
         }
-        
-        return true;
+        try {
+            JDBCTreballadorDAO.inscriureGuardia(Treballador, this);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+                return true;
     }
+
+    public void cancelarGuardia(Treballador Treballador) {
+        try {
+            JDBCTreballadorDAO.cancelarGuardia(Treballador, this);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void triaTreballador(){
         for (Treballador treballador : trApuntats) {
             treballador.calcularPrioritat();

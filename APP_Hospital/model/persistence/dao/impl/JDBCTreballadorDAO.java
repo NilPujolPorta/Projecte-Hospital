@@ -164,7 +164,7 @@ public class JDBCTreballadorDAO{
         Short idGuardia = g.getId();
         String sqlOrdre = "SELECT MAX(numInscripcio) FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia; 
         String sqlCancelada = "SELECT cancelada FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia+" and idTreballador="+idTreballador;
-        short cancelat,ordre;
+        short cancelat,ordre=-1;
 
         //set Ordre    
         try{
@@ -176,6 +176,8 @@ public class JDBCTreballadorDAO{
             {
                 ordre = rs.getShort(1);
                 ordre++;   
+            } else{
+                throw new RuntimeException("no exstence");
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
@@ -202,12 +204,11 @@ public class JDBCTreballadorDAO{
         //add to TreballadorsApuntats
         try{
             conn.createStatement();
-            String query ="insert into "+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognoms,idCategoria) values(?,?,?,?)";
+            String query ="insert into "+ MySQLConnection.getDatabase() +".treballadorsapuntats(numInscripcio,assignada,cancelada,idGuardia,idTreballador) values(?,0,0,?,?)";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setShort (1, t.getId());
-            preparedStmt.setString (2, t.getNom());
-            preparedStmt.setString (3, t.getCognoms());
-            preparedStmt.setShort (4, t.getCat());
+            preparedStmt.setShort (1, ordre);
+            preparedStmt.setShort (4, g.getId());
+            preparedStmt.setShort (5, t.getId());
             preparedStmt.execute();
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
@@ -215,5 +216,21 @@ public class JDBCTreballadorDAO{
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
         
+    }
+    public static void cancelarGuardia(Treballador t, Guardies g) throws DAOException, SQLException {
+        Connection conn = MySQLConnection.getConnection();
+        Short idTreballador = g.getId();
+        Short idGuardia = g.getId();
+        String sqlCancelada = "DROP * FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia+" and idTreballador="+idTreballador;
+
+        //set Ordre    
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery(sqlCancelada);
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
     }
 }

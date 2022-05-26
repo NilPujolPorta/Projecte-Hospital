@@ -198,9 +198,8 @@ public class JDBCTreballadorDAO{
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
-           
-
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());   
+        }
 
         //add to TreballadorsApuntats
         try{
@@ -219,5 +218,4 @@ public class JDBCTreballadorDAO{
         }
         
     }
-  
 }

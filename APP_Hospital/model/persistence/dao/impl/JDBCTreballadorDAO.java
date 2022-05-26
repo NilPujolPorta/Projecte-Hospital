@@ -6,6 +6,8 @@
 package APP_Hospital.model.persistence.dao.impl;
 
 import java.sql.SQLException;
+
+import APP_Hospital.model.business.entities.Guardies;
 import APP_Hospital.model.business.entities.Treballador;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -156,6 +158,66 @@ public class JDBCTreballadorDAO{
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
         return null;
+    }
+
+    public static void inscriureGuardia(Treballador t, Guardies g) throws DAOException, SQLException {
+        Connection conn = MySQLConnection.getConnection();
+        Short idTreballador = g.getId();
+        Short idGuardia = g.getId();
+        String sqlOrdre = "SELECT MAX(numInscripcio) FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia; 
+        String sqlCancelada = "SELECT cancelada FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia+" and idTreballador="+idTreballador;
+        short cancelat,ordre;
+
+        //set Ordre    
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs= stmt.executeQuery(sqlOrdre);
+            rs = stmt.getResultSet();
+            
+            if (rs.next())
+            {
+                ordre = rs.getShort(1);
+                ordre++;   
+            }
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
+
+        //set cancelada
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs= stmt.executeQuery(sqlCancelada);
+            rs = stmt.getResultSet();
+            
+            if (rs.next())
+            {
+                cancelat = rs.getShort(1);
+                cancelat++;   
+            }
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+           
+
+
+        //add to TreballadorsApuntats
+        try{
+            conn.createStatement();
+            String query ="insert into "+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognoms,idCategoria) values(?,?,?,?)";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setShort (1, t.getId());
+            preparedStmt.setString (2, t.getNom());
+            preparedStmt.setString (3, t.getCognoms());
+            preparedStmt.setShort (4, t.getCat());
+            preparedStmt.execute();
+        }catch(Exception ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
+        
     }
   
 }

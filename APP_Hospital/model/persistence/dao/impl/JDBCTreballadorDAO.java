@@ -137,11 +137,10 @@ public class JDBCTreballadorDAO{
         }
     }
 
-    public static String guaridesInscrites(Treballador t) throws DAOException, SQLException {
+    public static void guaridesInscrites(Treballador t) throws DAOException, SQLException {
         Connection conn = MySQLConnection.getConnection();
         Short id = t.getId();
         String sql = "select t.idGuardia, idData from hospital.TreballadorsApuntats t left join hospital.Guardia g ON t.idGuardia = g.idGuardia where idTreballador="+id;
-        String result = "";
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs= stmt.executeQuery(sql);
@@ -150,14 +149,13 @@ public class JDBCTreballadorDAO{
             //millorar rendiment
             while (rs.next())
             {
-                result=result + "idGuardia: "+rs.getShort(1)+" | Data: "+rs.getString(2)+"\n";
+                t.reservarGuardia(new Guardies(rs.getShort(1), rs.getString(7), rs.getShort(6), rs.getShort(4), rs.getShort(5), rs.getShort(3)));
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
             System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
-        return null;
     }
 
     public static void inscriureGuardia(Treballador t, Guardies g) throws DAOException, SQLException {

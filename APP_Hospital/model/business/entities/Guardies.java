@@ -7,7 +7,7 @@ import APP_Hospital.exceptions.AlreadyAdded;
 import APP_Hospital.exceptions.CategoryMissmatch;
 
 public class Guardies {
-    private int id = -1;
+    private short id = -1;
     List<Treballador> trApuntats = new ArrayList<Treballador>();
     //day fromat = YYYYMMDD
     private String dia;
@@ -17,7 +17,7 @@ public class Guardies {
     private short places;
     Treballador treballadorsFinals[] = new Treballador[places];
 
-    public Guardies(int id, List<Treballador> trApuntats, String dia, short cat, short torn, short zona, short places) {//desde bd amb treballadors
+    public Guardies(short id, List<Treballador> trApuntats, String dia, short cat, short torn, short zona, short places) {//desde bd amb treballadors
         this.id = id;
         this.trApuntats = trApuntats;
         this.dia = dia;
@@ -27,7 +27,7 @@ public class Guardies {
         this.places = places;
     }
 
-    public Guardies(int id, String dia, short cat, short torn, short zona, short places) {// desde base de dades 
+    public Guardies(short id, String dia, short cat, short torn, short zona, short places) {// desde base de dades 
         this.id = id;
         this.dia = dia;
         this.cat = cat;
@@ -44,7 +44,7 @@ public class Guardies {
         this.places = places;
     }
 
-    public void setId(int id) {
+    public void setId(short id) {
         if (this.id != -1 || id <= 0) {
             return;
         }
@@ -79,7 +79,7 @@ public class Guardies {
     }
 
 
-    public int getId() {
+    public short getId() {
         return id;
     }
     

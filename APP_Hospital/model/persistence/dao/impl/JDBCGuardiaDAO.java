@@ -15,15 +15,18 @@ public class JDBCGuardiaDAO {
 
     public static void add(Guardies g) throws DAOException, SQLException {
         Connection conn = MySQLConnection.getConnection();
-        Short id = null;
+        Short id = -1;
         String sqlMaxID = "Select max(idGuardia)+1 from "+MySQLConnection.getDatabase()+".Guardia";
         try{
-            
-            Statement stmt = conn.createStatement();
-            ResultSet rs= stmt.executeQuery(sqlMaxID);
-            rs = stmt.getResultSet();
-            if(rs.next()){
-                id=rs.getShort(1);
+            if(g.getId()<0){
+                Statement stmt = conn.createStatement();
+                ResultSet rs= stmt.executeQuery(sqlMaxID);
+                rs = stmt.getResultSet();
+                if(rs.next()){
+                    id=rs.getShort(1);
+                }  
+            }else{
+                id=g.getId();
             }
             conn.createStatement();
             String query ="insert into "+ MySQLConnection.getDatabase() +".Guardia(idGuardia,idData,idCategoria,idTorn,idZona,places) values(?,?,?,?,?)";

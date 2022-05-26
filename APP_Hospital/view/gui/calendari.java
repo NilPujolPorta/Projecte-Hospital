@@ -1,6 +1,5 @@
 package APP_Hospital.view.gui;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -25,15 +24,14 @@ public class calendari {
         int mesActual = calendari.get(Calendar.MONTH);
         mesActual += 1;
 
-        System.out.println("Mes ACTUAL: " + mesActual);
-        System.out.println("Mes ENTRAT: " + mes);
-
-        System.out.println("any ACTUAL: " + anyActual);
+        System.out.println(" - DEBUG: Mes ACTUAL: " + mesActual);
+        System.out.println(" - DEBUG: Mes ENTRAT: " + mes);
+        System.out.println(" - DEBUG: Any ACTUAL: " + anyActual);
 
         if (mes < mesActual) {
             anyActual += 1;
         }
-        System.out.println("any processat: " + anyActual);
+        System.out.println(" - DEBUG: Any processat: " + anyActual);
 
         return anyActual;
 

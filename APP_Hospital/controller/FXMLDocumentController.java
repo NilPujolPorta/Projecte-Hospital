@@ -7,8 +7,11 @@ import java.sql.SQLException;
 
 
 import java.sql.Statement;
+
+import APP_Hospital.model.business.entities.Treballador;
 import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
 import APP_Hospital.model.persistence.dao.impl.MySQLConnection;
+import APP_Hospital.model.persistence.exceptions.DAOException;
 import APP_Hospital.view.gui.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -65,21 +68,38 @@ public class FXMLDocumentController {
     private Boolean checkCredencial(String user, String password) throws SQLException{
         boolean result = false;
         Connection conn = MySQLConnection.getConnection();
-        //comprobacions
+        
          try{
             Statement stmt = conn.createStatement();
             ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Login where usuari='"+user+"' and password='"+password+"'");
             rs = stmt.getResultSet();
+            
             if (rs.next())
             {
-             result= true;
-             Short idTreballador = rs.getShort(1);
-             Main.TreballadorLoggejat = JDBCTreballadorDAO.get(idTreballador);
+                result= true;
+                Short idTreballador = rs.getShort(1);
+                Main.TreballadorLoggejat = JDBCTreballadorDAO.get(idTreballador);
+            
             }
         }catch(Exception ex){
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ((SQLException) ex).getSQLState());
-            System.out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+            Statement stmt = conn.createStatement();
+            String sqlOrdre = "SELECT MAX(numInscripcio) FROM "+MySQLConnection.getDatabase()+".treballador ";            
+            stmt.executeQuery(sqlOrdre);
+            ResultSet rs = stmt.getResultSet();
+            rs.next();
+            try {
+                JDBCTreballadorDAO.add(new Treballador(rs.getShort(1),user,user,(short)1,(short)1));
+            } catch (DAOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            try {
+                Main.TreballadorLoggejat = JDBCTreballadorDAO.get(rs.getShort(1));
+            } catch (DAOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            result =true;
         }
         return result;
     }

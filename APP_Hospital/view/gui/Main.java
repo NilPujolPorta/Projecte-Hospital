@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static Treballador TreballadorLoggejat;
-    public static boolean intencioQuit = false;
+    public static boolean intencioQuit = true;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

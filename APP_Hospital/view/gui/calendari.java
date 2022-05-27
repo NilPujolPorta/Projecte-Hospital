@@ -312,8 +312,6 @@ public class calendari {
             }
         }
 
-        // ********* desar aquesta guardia ********
-
     }
 
     private static void separador() {

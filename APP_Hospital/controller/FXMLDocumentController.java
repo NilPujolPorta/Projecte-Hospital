@@ -56,6 +56,7 @@ public class FXMLDocumentController {
         } 
         
         if (Login) {
+            Main.intencioQuit = false;
             Stage stage = (Stage) button_Login.getScene().getWindow();
             stage.close();
             Platform.exit();

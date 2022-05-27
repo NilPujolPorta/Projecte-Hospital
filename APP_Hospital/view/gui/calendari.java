@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import APP_Hospital.exceptions.AlreadyAdded;
+import APP_Hospital.exceptions.CategoryMissmatch;
+import APP_Hospital.model.business.entities.Guardies;
 import APP_Hospital.model.business.utils.utils;
 
 public class calendari {
@@ -171,8 +174,19 @@ public class calendari {
                     System.out.println("\n" + "Error: La zona escollida no és correcte");
                 }
             }
-
-            escollirTorn(dia, mes, anyActual, zona);
+            short zonanum = -1;
+            if (zona == "unitat1") {
+                zonanum = 0;
+            }else if (zona == "unitat2") {
+                zonanum = 1;
+            } else if (zona == "unitat3") {
+                zonanum = 2;
+            } else if (zona == "unitat4") {
+                zonanum = 3;
+            } else if (zona == "UCIES"){
+                zonanum = 4;
+            }
+            escollirTorn(dia, mes, anyActual, zonanum);
         }
     }
 
@@ -184,7 +198,7 @@ public class calendari {
      * @param anyActual
      * @param zona
      */
-    private static void escollirTorn(int dia, int mes, int anyActual, String zona) {
+    private static void escollirTorn(int dia, int mes, int anyActual, Short zona) {
         boolean correcte = false;
         String torn = "";
         try (Scanner lectura = new Scanner(System.in)) {
@@ -211,7 +225,13 @@ public class calendari {
                 }
             }
         }
-        mostrarDades(dia, mes, anyActual, zona, torn);
+        short tornnum = 0;
+        if (torn == "dia"){
+            tornnum = 1;
+        } else{
+            tornnum = 0;
+        }
+        mostrarDades(dia, mes, anyActual, zona, tornnum);
     }
 
     /**
@@ -224,7 +244,7 @@ public class calendari {
      * @param zona
      * @param torn
      */
-    private static void mostrarDades(int dia, int mes, int anyActual, String zona, String torn) {
+    private static void mostrarDades(int dia, int mes, int anyActual, Short zona, Short torn) {
         try (Scanner lectura = new Scanner(System.in)) {
             boolean correcte = false;
 
@@ -272,6 +292,14 @@ public class calendari {
             }
 
             String dataJunta = anyActual + mesTractat + diaTractat;
+            Guardies g = new Guardies(dataJunta, (short)1, torn, zona, (short)10);
+            try {
+                g.reservarGuardia(Main.TreballadorLoggejat);
+            } catch (AlreadyAdded e) {
+                e.printStackTrace();
+            } catch (CategoryMissmatch e) {
+                e.printStackTrace();
+            }
         }
 
         // ********* desar aquesta guardia ********

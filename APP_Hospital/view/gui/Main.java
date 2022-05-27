@@ -1,9 +1,12 @@
 package APP_Hospital.view.gui;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import APP_Hospital.model.business.entities.Treballador;
 import APP_Hospital.model.business.utils.utils;
+import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
+import APP_Hospital.model.persistence.exceptions.DAOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -75,13 +78,21 @@ public class Main extends Application {
 
         boolean correcte = true;
         while (!correcte) {
-            // Veure les meves guardies
+            //logout
             if (opcio == 0) {
                 correcte = true;
                 logOut(null);
+                // Veure les meves guardies
             } else if (opcio == 1) {
                 correcte = true;
-                calendari.opcionsGuardia();
+                try {
+                    JDBCTreballadorDAO.guaridesInscrites(TreballadorLoggejat);
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(TreballadorLoggejat.getGuardies());                
                 // Apuntarme a un dia de guardia
             } else if (opcio == 2) {
                 correcte = true;
@@ -89,11 +100,11 @@ public class Main extends Application {
                 // Veure les guardies dels treballadors
             } else if (opcio == 3 && admin) {
                 correcte = true;
-                calendari.opcionsGuardia();
+                System.out.println("under progress");
                 // Editar fitxer de configuració
             } else if (opcio == 4 && admin) {
                 correcte = true;
-                calendari.opcionsGuardia();
+                System.out.println("under progress");
             }
         }
 

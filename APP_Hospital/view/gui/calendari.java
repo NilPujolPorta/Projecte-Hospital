@@ -1,5 +1,6 @@
 package APP_Hospital.view.gui;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -9,6 +10,8 @@ import APP_Hospital.exceptions.AlreadyAdded;
 import APP_Hospital.exceptions.CategoryMissmatch;
 import APP_Hospital.model.business.entities.Guardies;
 import APP_Hospital.model.business.utils.utils;
+import APP_Hospital.model.persistence.dao.impl.JDBCGuardiaDAO;
+import APP_Hospital.model.persistence.exceptions.DAOException;
 
 public class calendari {
 
@@ -293,6 +296,13 @@ public class calendari {
 
             String dataJunta = anyActual + mesTractat + diaTractat;
             Guardies g = new Guardies(dataJunta, (short)1, torn, zona, (short)10);
+            try {
+                JDBCGuardiaDAO.add(g);
+            } catch (DAOException e1) {
+                e1.printStackTrace();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             try {
                 g.reservarGuardia(Main.TreballadorLoggejat);
             } catch (AlreadyAdded e) {

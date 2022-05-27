@@ -20,6 +20,15 @@ public class Treballador {
         this.cognoms = cognoms;
         this.idCategoria = idCategoria;
         prioritat = 1;
+
+    }
+    public Treballador(short id, String nom, String cognoms, short idCategoria, short prioritat) {
+        this.id = id;
+        this.nom = nom;
+        this.cognoms = cognoms;
+        this.idCategoria = idCategoria;
+        this.prioritat = prioritat;
+
     }
 
     public short getId() {
@@ -51,6 +60,16 @@ public class Treballador {
             throw new AlreadyAdded();
         }
         guardies.add(guardia);
+    }
+
+    public void cancelarGuardia(Guardies guardia) {
+        if (guardies.contains(guardia)) {
+            guardies.remove(guardia);
+        }  
+    }
+
+    public List<Guardies> getGuardies(){
+        return guardies;
     }
 
     public int calcularPrioritat(){

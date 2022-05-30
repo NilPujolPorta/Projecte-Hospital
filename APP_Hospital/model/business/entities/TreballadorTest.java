@@ -25,9 +25,7 @@ public class TreballadorTest {
         Guardies guardia2 = new Guardies("20220202", (short)2, (short)2, (short)2, (short)2);
         Guardies guardia3 = new Guardies("20220202", (short)3, (short)3, (short)3, (short)3);
         Treballador jordi = new Treballador((short)1, "jordi", "padrosa", (short)2);
-        //guardies.add(guardia);
-        //guardies.add(guardia2);
-        //guardies.add(guardia3);
+        
         try {
             jordi.reservarGuardia(guardia);
             //jordi.reservarGuardia(guardia);
@@ -36,7 +34,7 @@ public class TreballadorTest {
 
         } catch (AlreadyAdded e) {
             // TODO Auto-generated catch block
-            System.out.println("error");
+            System.out.println("AlreadyAdded");
         }
         assertEquals(3, jordi.guardies.size());
 

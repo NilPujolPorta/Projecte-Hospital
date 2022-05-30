@@ -42,7 +42,7 @@ public class Main extends Application {
         Integer opcio=0;
         do {
             opcio = puntsMenu(admin, lectura);
-            menuPrincipal(opcio, admin);
+            menuPrincipal(opcio, admin, lectura);
         } while (opcio != 0);
         
 
@@ -82,8 +82,9 @@ public class Main extends Application {
      * Crida les funcions necessàries segons la opció escollida
      * 
      * @param opcio short
+     * @param lectura
      */
-    public static void menuPrincipal(Integer opcio, boolean admin) {
+    public static void menuPrincipal(Integer opcio, boolean admin, Scanner lectura) {
 
         //logout
         if (opcio == 0) {
@@ -104,7 +105,7 @@ public class Main extends Application {
             }              
             // Apuntarme a un dia de guardia
         } else if (opcio == 2) {
-            calendari.opcionsGuardia();
+            calendari.opcionsGuardia(lectura);
             // Veure les guardies dels treballadors
         } else if (opcio == 3 && admin) {
             System.out.println("under progress");

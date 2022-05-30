@@ -44,10 +44,11 @@ public class calendari {
     /**
      * Mostrar menú d'opcions per escollir les dades del dia de guàrdia
      * Si el mes escollit no és correcte repetirà la pregunta
+     * @param lectura2
      * 
      * @return int mes
      */
-    public static void opcionsGuardia() {
+    public static void opcionsGuardia(Scanner lectura) {
         int mes = 1;
         boolean correcte = false;
 
@@ -57,10 +58,8 @@ public class calendari {
 
         while (!correcte) {
             System.out.print("Mes: ");
-
-            try (Scanner lectura = new Scanner(System.in)) {
-                mes = lectura.nextInt();
-            }
+            mes = lectura.nextInt();
+            
             correcte = (mes < 13 && mes > 0) ? true : false;
             if (!correcte) {
                 System.out.println(
@@ -68,16 +67,17 @@ public class calendari {
             }
         }
 
-        veureCalendari(mes);
+        veureCalendari(mes, lectura);
     }
 
     /**
      * Mostrar els diumenges del mes escollit
      * 
      * @param mes
+     * @param lectura
      * @return array de diumenges del mes
      */
-    public static void veureCalendari(int mes) {
+    public static void veureCalendari(int mes, Scanner lectura) {
         Calendar calendari = Calendar.getInstance();
         int[] diumenges = new int[5]; // Desar els diumenges per poder realitzar comprobacions
         int i = 0;
@@ -114,7 +114,7 @@ public class calendari {
             }
         }
 
-        escollirDia(diumenges, mes, anyActual);
+        escollirDia(diumenges, mes, anyActual, lectura);
 
     }
 
@@ -122,11 +122,11 @@ public class calendari {
      * Escollir un dia entre els diumenges mostrats
      * 
      * @param diumenges
+     * @param lectura2
      * @return
      */
-    private static void escollirDia(int[] diumenges, int mes, int anyActual) {
+    private static void escollirDia(int[] diumenges, int mes, int anyActual, Scanner lectura) {
         boolean correcte = false;
-        try (Scanner lectura = new Scanner(System.in)) {
             int dia = 1;
             // boolean trobat = false;
             while (!correcte) {
@@ -138,8 +138,8 @@ public class calendari {
                 }
             }
 
-            escollirZona(dia, mes, anyActual);
-        }
+            escollirZona(dia, mes, anyActual, lectura);
+        
 
     }
 
@@ -149,45 +149,45 @@ public class calendari {
      * @param dia
      * @param mes
      * @param anyActual
+     * @param lectura2
      */
-    private static void escollirZona(int dia, int mes, int anyActual) {
-        try (Scanner lectura = new Scanner(System.in)) {
-            // obtenir les zones
-            String[] zones = { "unitat1", "unitat3", "unitat4", "UCIES" };
-            String zona = "";
-            boolean correcte = false;
-            int quantesZones = zones.length;
-            separador();
+    private static void escollirZona(int dia, int mes, int anyActual, Scanner lectura) {
+        // obtenir les zones
+        String[] zones = { "unitat1", "unitat3", "unitat4", "UCIES" };
+        String zona = "";
+        boolean correcte = false;
+        int quantesZones = zones.length;
+        separador();
 
-            System.out.print("Zones a escollir: ");
+        System.out.print("Zones a escollir: ");
 
-            for (int i = 0; i < quantesZones; i++) {
-                System.out.print(zones[i] + " ");
-            }
-
-            while (!correcte) {
-                System.out.print("\n" + "\n" + "Escull una zona: ");
-                zona = lectura.next();
-                correcte = (Arrays.asList(zones).contains(zona));
-
-                if (!correcte) {
-                    System.out.println("\n" + "Error: La zona escollida no és correcte");
-                }
-            }
-            short zonanum = -1;
-            if (zona == "unitat1") {
-                zonanum = 0;
-            } else if (zona == "unitat2") {
-                zonanum = 1;
-            } else if (zona == "unitat3") {
-                zonanum = 2;
-            } else if (zona == "unitat4") {
-                zonanum = 3;
-            } else if (zona == "UCIES") {
-                zonanum = 4;
-            }
-            escollirTorn(dia, mes, anyActual, zonanum);
+        for (int i = 0; i < quantesZones; i++) {
+            System.out.print(zones[i] + " ");
         }
+
+        while (!correcte) {
+            System.out.print("\n" + "\n" + "Escull una zona: ");
+            zona = lectura.next();
+            correcte = (Arrays.asList(zones).contains(zona));
+
+            if (!correcte) {
+                System.out.println("\n" + "Error: La zona escollida no és correcte");
+            }
+        }
+        short zonanum = 5;
+        if (zona == "unitat1") {
+            zonanum = 0;
+        } else if (zona == "unitat2") {
+            zonanum = 1;
+        } else if (zona == "unitat3") {
+            zonanum = 2;
+        } else if (zona == "unitat4") {
+            zonanum = 3;
+        } else if (zona == "UCIES") {
+            zonanum = 4;
+        }
+        escollirTorn(dia, mes, anyActual, zonanum, lectura);
+        
     }
 
     /**
@@ -197,40 +197,40 @@ public class calendari {
      * @param mes
      * @param anyActual
      * @param zona
+     * @param lectura2
      */
-    private static void escollirTorn(int dia, int mes, int anyActual, Short zona) {
+    private static void escollirTorn(int dia, int mes, int anyActual, Short zona, Scanner lectura) {
         boolean correcte = false;
         String torn = "";
-        try (Scanner lectura = new Scanner(System.in)) {
-            // obetnir els torns
-            String[] torns = { "dia", "nit" };
+        // obetnir els torns
+        String[] torns = { "dia", "nit" };
 
-            int quantsTorns = torns.length;
-            separador();
-            System.out.print("Torns a escollir: ");
+        int quantsTorns = torns.length;
+        separador();
+        System.out.print("Torns a escollir: ");
 
-            for (int i = 0; i < quantsTorns; i++) {
-                System.out.print(torns[i] + " ");
-            }
+        for (int i = 0; i < quantsTorns; i++) {
+            System.out.print(torns[i] + " ");
+        }
 
-            // escollir dia o nit
-            while (!correcte) {
-                System.out.print("\n" + "\n" + "Escull un torn: ");
-                torn = lectura.nextLine();
-                correcte = (Arrays.asList(torns).contains(torn));
+        // escollir dia o nit
+        while (!correcte) {
+            System.out.print("\n" + "\n" + "Escull un torn: ");
+            torn = lectura.next();
+            correcte = (Arrays.asList(torns).contains(torn));
 
-                if (!correcte) {
-                    System.out.println("\n" + "Error: El torn escollit no és correcte");
-                }
+            if (!correcte) {
+                System.out.println("\n" + "Error: El torn escollit no és correcte");
             }
         }
+        
         short tornnum = 0;
         if (torn == "dia") {
             tornnum = 1;
         } else {
             tornnum = 0;
         }
-        mostrarDades(dia, mes, anyActual, zona, tornnum);
+        mostrarDades(dia, mes, anyActual, zona, tornnum, lectura);
     }
 
     /**
@@ -242,70 +242,69 @@ public class calendari {
      * @param anyActual
      * @param zona
      * @param torn
+     * @param lectura2
      */
-    private static void mostrarDades(int dia, int mes, int anyActual, Short zona, Short torn) {
-        try (Scanner lectura = new Scanner(System.in)) {
-            boolean correcte = false;
+    private static void mostrarDades(int dia, int mes, int anyActual, Short zona, Short torn, Scanner lectura) {
+        boolean correcte = false;
 
-            separador();
-            System.out.println(" * Has escollit: ");
+        separador();
+        System.out.println(" * Has escollit: ");
 
-            String diaTractat;
-            String mesTractat;
+        String diaTractat;
+        String mesTractat;
 
-            if (dia < 10) {
-                diaTractat = '0' + Integer.toString(dia);
-            } else {
-                diaTractat = Integer.toString(dia);
+        if (dia < 10) {
+            diaTractat = '0' + Integer.toString(dia);
+        } else {
+            diaTractat = Integer.toString(dia);
+        }
+        if (mes < 10) {
+            mesTractat = '0' + Integer.toString(mes);
+        } else {
+            mesTractat = Integer.toString(mes);
+        }
+
+        String data = diaTractat + "-" + mesTractat + "-" + anyActual;
+
+        System.out.println(data + " a " + zona + " el torn de " + torn + "\n");
+
+        System.out.print(" * Estàs d'acord? (escriu: Si/No): ");
+        String resposta = lectura.next();
+
+        while (!correcte) {
+            System.out.println("---" + resposta);
+            switch (resposta.toLowerCase()) {
+                case "si":
+                    correcte = true;
+                    break;
+
+                case "no":
+                    System.exit(0);
+
+                    break;
+
+                default:
+                    System.out.print("\n" + "Error: Resposta Incorrecte (escriu: Si/No): ");
+                    resposta = lectura.next();
+                    break;
             }
-            if (mes < 10) {
-                mesTractat = '0' + Integer.toString(mes);
-            } else {
-                mesTractat = Integer.toString(mes);
-            }
+        }
 
-            String data = diaTractat + "-" + mesTractat + "-" + anyActual;
-
-            System.out.println(data + " a " + zona + " el torn de " + torn + "\n");
-
-            System.out.print(" * Estàs d'acord? (escriu: Si/No): ");
-            String resposta = lectura.nextLine();
-
-            while (!correcte) {
-                System.out.println("---" + resposta);
-                switch (resposta.toLowerCase()) {
-                    case "si":
-                        correcte = true;
-                        break;
-
-                    case "No":
-                        System.exit(0);
-
-                        break;
-
-                    default:
-                        System.out.print("\n" + "Error: Resposta Incorrecte (escriu: Si/No): ");
-                        resposta = lectura.next();
-                        break;
-                }
-            }
-
-            String dataJunta = anyActual + mesTractat + diaTractat;
-            Guardies g = new Guardies(dataJunta, (short) 1, torn, zona, (short) 10);
-            try {
-                JDBCGuardiaDAO.add(g);
-            } catch (DAOException e1) {
-                e1.printStackTrace();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            try {
-                g.reservarGuardia(Main.TreballadorLoggejat);
-            } catch (AlreadyAdded e) {
-                e.printStackTrace();
-            } catch (CategoryMissmatch e) {
-                e.printStackTrace();
-            }
+        String dataJunta = anyActual + mesTractat + diaTractat;
+        Guardies g = new Guardies(dataJunta, (short) 1, torn, zona, (short) 10);
+        try {
+            JDBCGuardiaDAO.add(g);
+        } catch (DAOException e1) {
+            System.out.println("1.1");
+        } catch (SQLException e1) {
+            System.out.println("1.2");
+        }
+        try {
+            g.reservarGuardia(Main.TreballadorLoggejat);
+        } catch (AlreadyAdded e) {
+            System.out.println("2.1");
+        } catch (CategoryMissmatch e) {
+            System.out.println("2.2");
         }
 
     }

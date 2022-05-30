@@ -29,7 +29,7 @@ public class JDBCTreballadorDAO{
         
         try{
             Statement stmt = conn.createStatement();
-            ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Treballador where idTreballador="+id);
+            ResultSet rs= stmt.executeQuery("SELECT * FROM "+ MySQLConnection.getDatabase() +".Treballador where idTreballador="+id+";");
             rs = stmt.getResultSet();
             
 
@@ -81,7 +81,7 @@ public class JDBCTreballadorDAO{
         Connection conn = MySQLConnection.getConnection();
         try{
             conn.createStatement();
-            String query ="insert into "+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognoms,idCategoria) values(?,?,?,?)";
+            String query ="insert into "+ MySQLConnection.getDatabase() +".Treballador(idTreballador,nom,cognoms,idCategoria) values(?,?,?,?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setShort (1, t.getId());
             preparedStmt.setString (2, t.getNom());
@@ -109,7 +109,7 @@ public class JDBCTreballadorDAO{
     public static void delete(Treballador t) throws DAOException, SQLException {
         Short id = t.getId();
         Connection conn = MySQLConnection.getConnection();
-        String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id;
+        String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id+";";
 
         try{
             Statement stmt = conn.createStatement();
@@ -124,7 +124,7 @@ public class JDBCTreballadorDAO{
     //delete Treballador passing is as an ID
     public static void delete(short id) throws DAOException, SQLException {
         Connection conn = MySQLConnection.getConnection();
-        String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id;
+        String sql = "DELETE FROM "+MySQLConnection.getDatabase()+".Treballador where idTorn="+id+";";
 
         try{
             Statement stmt = conn.createStatement();
@@ -140,7 +140,7 @@ public class JDBCTreballadorDAO{
     public static void guaridesInscrites(Treballador t) throws DAOException, SQLException {
         Connection conn = MySQLConnection.getConnection();
         Short id = t.getId();
-        String sql = "select t.idGuardia, idData from hospital.TreballadorsApuntats t left join hospital.Guardia g ON t.idGuardia = g.idGuardia where idTreballador="+id;
+        String sql = "select t.idGuardia, idData from hospital.TreballadorsApuntats t left join hospital.Guardia g ON t.idGuardia = g.idGuardia where idTreballador="+id+";";
         try{
             Statement stmt = conn.createStatement();
             ResultSet rs= stmt.executeQuery(sql);
@@ -150,7 +150,7 @@ public class JDBCTreballadorDAO{
             while (rs.next())
             {
                 Connection con = MySQLConnection.getConnection();
-                String guardia = "select * from guardia where idGuardia="+rs.getShort(1);
+                String guardia = "select * from guardia where idGuardia="+rs.getShort(1)+";";
                 Statement stamt = con.createStatement();
                 ResultSet rsGuardia = stamt.executeQuery(guardia);
                 rsGuardia.next();
@@ -167,7 +167,7 @@ public class JDBCTreballadorDAO{
         Connection conn = MySQLConnection.getConnection();
         Short idTreballador = g.getId();
         Short idGuardia = g.getId();
-        String sqlOrdre = "SELECT MAX(numInscripcio) FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia; 
+        String sqlOrdre = "SELECT MAX(numInscripcio) FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia+";"; 
         short ordre=-1;
 
         //set Ordre    
@@ -192,11 +192,11 @@ public class JDBCTreballadorDAO{
         //add to TreballadorsApuntats
         try{
             conn.createStatement();
-            String query ="insert into "+ MySQLConnection.getDatabase() +".treballadorsapuntats(numInscripcio,assignada,cancelada,idGuardia,idTreballador) values(?,0,0,?,?)";
+            String query ="insert into "+ MySQLConnection.getDatabase() +".treballadorsapuntats(numInscripcio,idGuardia,idTreballador) values(?,?,?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setShort (1, ordre);
-            preparedStmt.setShort (4, idGuardia);
-            preparedStmt.setShort (5, idTreballador);
+            preparedStmt.setShort (2, idGuardia);
+            preparedStmt.setShort (3, idTreballador);
             preparedStmt.execute();
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
@@ -209,7 +209,7 @@ public class JDBCTreballadorDAO{
         Connection conn = MySQLConnection.getConnection();
         Short idTreballador = g.getId();
         Short idGuardia = g.getId();
-        String sqlCancelada = "DROP * FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia+" and idTreballador="+idTreballador;
+        String sqlCancelada = "DROP * FROM "+MySQLConnection.getDatabase()+".TreballadorsApuntats WHERE idGuardia="+idGuardia+" and idTreballador="+idTreballador+";";
 
         //set Ordre    
         try{

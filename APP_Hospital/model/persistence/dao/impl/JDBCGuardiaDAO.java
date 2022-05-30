@@ -29,7 +29,7 @@ public class JDBCGuardiaDAO {
                 id=g.getId();
             }
             conn.createStatement();
-            String query ="insert into "+ MySQLConnection.getDatabase() +".Guardia(idGuardia,idData,idCategoria,idTorn,idZona,places) values(?,?,?,?,?)";
+            String query ="insert into "+ MySQLConnection.getDatabase() +".Guardia(idGuardia,idData,idCategoria,idTorn,idZona) values(?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setShort (1, id);
             preparedStmt.setString (2, g.getDia());

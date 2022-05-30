@@ -228,7 +228,7 @@ public class calendari {
         if (torn == "dia") {
             tornnum = 1;
         } else {
-            tornnum = 0;
+            tornnum = 2;
         }
         mostrarDades(dia, mes, anyActual, zona, tornnum, lectura);
     }

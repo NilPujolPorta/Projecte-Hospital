@@ -15,8 +15,6 @@ import APP_Hospital.model.persistence.exceptions.DAOException;
 
 public class calendari {
 
-    private int anyActual;
-
     /**
      * Obtenim l'any del mes seleccionat
      * Si el número de mes, és inferior al del mes actual, retorna l'any següent.
@@ -155,7 +153,6 @@ public class calendari {
     private static void escollirZona(int dia, int mes, int anyActual) {
         try (Scanner lectura = new Scanner(System.in)) {
             // obtenir les zones
-            String cercar = "zones";
             String[] zones = { "unitat1", "unitat3", "unitat4", "UCIES" };
             String zona = "";
             boolean correcte = false;
@@ -180,13 +177,13 @@ public class calendari {
             short zonanum = -1;
             if (zona == "unitat1") {
                 zonanum = 0;
-            }else if (zona == "unitat2") {
+            } else if (zona == "unitat2") {
                 zonanum = 1;
             } else if (zona == "unitat3") {
                 zonanum = 2;
             } else if (zona == "unitat4") {
                 zonanum = 3;
-            } else if (zona == "UCIES"){
+            } else if (zona == "UCIES") {
                 zonanum = 4;
             }
             escollirTorn(dia, mes, anyActual, zonanum);
@@ -206,7 +203,6 @@ public class calendari {
         String torn = "";
         try (Scanner lectura = new Scanner(System.in)) {
             // obetnir els torns
-            String cercar = "torns";
             String[] torns = { "dia", "nit" };
 
             int quantsTorns = torns.length;
@@ -229,9 +225,9 @@ public class calendari {
             }
         }
         short tornnum = 0;
-        if (torn == "dia"){
+        if (torn == "dia") {
             tornnum = 1;
-        } else{
+        } else {
             tornnum = 0;
         }
         mostrarDades(dia, mes, anyActual, zona, tornnum);
@@ -295,7 +291,7 @@ public class calendari {
             }
 
             String dataJunta = anyActual + mesTractat + diaTractat;
-            Guardies g = new Guardies(dataJunta, (short)1, torn, zona, (short)10);
+            Guardies g = new Guardies(dataJunta, (short) 1, torn, zona, (short) 10);
             try {
                 JDBCGuardiaDAO.add(g);
             } catch (DAOException e1) {

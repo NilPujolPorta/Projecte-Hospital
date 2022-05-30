@@ -11,7 +11,7 @@ public class Treballador {
     private String cognoms;
     private short idCategoria;
     public short prioritat;
-    List<Guardies> guardies = new ArrayList<Guardies>();
+    public List<Guardies> guardies = new ArrayList<Guardies>();
 
    
     public Treballador(short id, String nom, String cognoms, short idCategoria) {

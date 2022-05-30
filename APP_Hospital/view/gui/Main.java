@@ -1,6 +1,7 @@
 package APP_Hospital.view.gui;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,9 +38,10 @@ public class Main extends Application {
         boolean admin = true;
 
         // ** Cridar al menú per escollir una opció **
+        Scanner lectura = new Scanner(System.in);
         Integer opcio=0;
         do {
-            opcio = puntsMenu(admin);
+            opcio = puntsMenu(admin, lectura);
             menuPrincipal(opcio, admin);
         } while (opcio != 0);
         
@@ -57,9 +59,10 @@ public class Main extends Application {
     /**
      * 
      * @param admin
+     * @param lectura
      * @return
      */
-    private static Integer puntsMenu(boolean admin) {
+    private static Integer puntsMenu(boolean admin, Scanner lectura) {
         System.out.println("Escull una de les següents opcions:"
                 + "\n 0 - Tancar Sessió"
                 + "\n 1 - Veure les meves guàrdies"
@@ -68,10 +71,11 @@ public class Main extends Application {
             System.out.println(" 3 - Veure les guàrdies dels treballadors"
                     + "\n 4 - Editar fitxer de configuració");
         }
-        try (Scanner lectura = new Scanner(System.in)) {
-            Integer opcio = lectura.nextInt();
-            return opcio;
-        }
+            
+        Integer opcio = lectura.nextInt();
+        return opcio;
+            
+        
     }
 
     /**
@@ -87,6 +91,7 @@ public class Main extends Application {
             // Veure les meves guardies
         } else if (opcio == 1) {
             try {
+                TreballadorLoggejat.guardies = new ArrayList<Guardies>();;
                 JDBCTreballadorDAO.guaridesInscrites(TreballadorLoggejat);
             } catch (DAOException e) {
                 e.printStackTrace();

@@ -17,6 +17,12 @@ public class Guardies {
     private short cat;
     private short torn;
     private short zona;
+    @Override
+    public String toString() {
+        return "Guardia [cat=" + cat + ", dia=" + dia + ", id=" + id + ", places=" + places + ", torn=" + torn
+                + ", zona=" + zona + "]\n";
+    }
+
     private short places;
     Treballador treballadorsFinals[] = new Treballador[places];
 

@@ -56,6 +56,7 @@ public class FXMLDocumentController {
         } 
         
         if (Login) {
+            Main.intencioQuit = false;
             Stage stage = (Stage) button_Login.getScene().getWindow();
             stage.close();
             Platform.exit();
@@ -90,13 +91,11 @@ public class FXMLDocumentController {
             try {
                 JDBCTreballadorDAO.add(new Treballador(rs.getShort(1),user,user,(short)1,(short)1));
             } catch (DAOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             try {
                 Main.TreballadorLoggejat = JDBCTreballadorDAO.get(rs.getShort(1));
             } catch (DAOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             result =true;

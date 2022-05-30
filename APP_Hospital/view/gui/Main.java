@@ -1,8 +1,10 @@
 package APP_Hospital.view.gui;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
+import APP_Hospital.model.business.entities.Guardies;
 import APP_Hospital.model.business.entities.Treballador;
 import APP_Hospital.model.business.utils.utils;
 import APP_Hospital.model.persistence.dao.impl.JDBCTreballadorDAO;
@@ -35,8 +37,12 @@ public class Main extends Application {
         boolean admin = true;
 
         // ** Cridar al menú per escollir una opció **
-        short opcio = puntsMenu(admin);
-        menuPrincipal(opcio, admin);
+        Integer opcio=0;
+        do {
+            opcio = puntsMenu(admin);
+            menuPrincipal(opcio, admin);
+        } while (opcio != 0);
+        
 
     }
 
@@ -46,7 +52,6 @@ public class Main extends Application {
 
     public static void logOut(String[] args) {
         TreballadorLoggejat = null;
-        launch(args);
     }
 
     /**
@@ -54,7 +59,7 @@ public class Main extends Application {
      * @param admin
      * @return
      */
-    private Short puntsMenu(boolean admin) {
+    private static Integer puntsMenu(boolean admin) {
         System.out.println("Escull una de les següents opcions:"
                 + "\n 0 - Tancar Sessió"
                 + "\n 1 - Veure les meves guàrdies"
@@ -64,7 +69,7 @@ public class Main extends Application {
                     + "\n 4 - Editar fitxer de configuració");
         }
         try (Scanner lectura = new Scanner(System.in)) {
-            short opcio = lectura.nextShort();
+            Integer opcio = lectura.nextInt();
             return opcio;
         }
     }
@@ -74,40 +79,35 @@ public class Main extends Application {
      * 
      * @param opcio short
      */
-    public static void menuPrincipal(short opcio, boolean admin) {
+    public static void menuPrincipal(Integer opcio, boolean admin) {
 
-        boolean correcte = true;
-        while (!correcte) {
-            //logout
-            if (opcio == 0) {
-                correcte = true;
-                logOut(null);
-                // Veure les meves guardies
-            } else if (opcio == 1) {
-                correcte = true;
-                try {
-                    JDBCTreballadorDAO.guaridesInscrites(TreballadorLoggejat);
-                } catch (DAOException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(TreballadorLoggejat.getGuardies());                
-                // Apuntarme a un dia de guardia
-            } else if (opcio == 2) {
-                correcte = true;
-                calendari.opcionsGuardia();
-                // Veure les guardies dels treballadors
-            } else if (opcio == 3 && admin) {
-                correcte = true;
-                System.out.println("under progress");
-                // Editar fitxer de configuració
-            } else if (opcio == 4 && admin) {
-                correcte = true;
-                System.out.println("under progress");
+        //logout
+        if (opcio == 0) {
+            logOut(null);
+            // Veure les meves guardies
+        } else if (opcio == 1) {
+            try {
+                JDBCTreballadorDAO.guaridesInscrites(TreballadorLoggejat);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+            List<Guardies> gs =TreballadorLoggejat.getGuardies();  
+            for (int i = 0; i < gs.size(); i++){
+                System.out.println(gs.get(i)+" ");
+            }              
+            // Apuntarme a un dia de guardia
+        } else if (opcio == 2) {
+            calendari.opcionsGuardia();
+            // Veure les guardies dels treballadors
+        } else if (opcio == 3 && admin) {
+            System.out.println("under progress");
+            // Editar fitxer de configuració
+        } else if (opcio == 4 && admin) {
+            System.out.println("under progress");
+        }else{
+            System.out.println("Codi erroni");
         }
-
     }
-
 }

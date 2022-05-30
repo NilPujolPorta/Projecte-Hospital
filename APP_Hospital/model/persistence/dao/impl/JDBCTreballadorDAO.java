@@ -149,7 +149,12 @@ public class JDBCTreballadorDAO{
             //millorar rendiment
             while (rs.next())
             {
-                t.reservarGuardia(new Guardies(rs.getShort(1), rs.getString(7), rs.getShort(6), rs.getShort(4), rs.getShort(5), rs.getShort(3)));
+                Connection con = MySQLConnection.getConnection();
+                String guardia = "select * from guardia where idGuardia="+rs.getShort(1);
+                Statement stamt = con.createStatement();
+                ResultSet rsGuardia = stamt.executeQuery(guardia);
+                rsGuardia.next();
+                t.reservarGuardia(new Guardies(rsGuardia.getShort(1), rsGuardia.getString(7), rsGuardia.getShort(6), rsGuardia.getShort(4), rsGuardia.getShort(5), rsGuardia.getShort(3)));
             }
         }catch(Exception ex){
             System.out.println("SQLException: " + ex.getMessage());
